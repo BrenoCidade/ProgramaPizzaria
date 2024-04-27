@@ -4,10 +4,10 @@ public class Pedido {
     
     private static int count = 1;
 
-    private int id, pagamento;
-    private String pizza, nomePessoa;
+    private int id;
+    private String pizza, nomePessoa, pagamento;
 
-    public Pedido(int pagamento, String pizza, String nomePessoa) {
+    public Pedido(String pagamento, String pizza, String nomePessoa) {
         this.id = count;
         this.pagamento = pagamento;
         this.pizza = pizza;
@@ -23,11 +23,11 @@ public class Pedido {
         this.id = id;
     }
 
-    public int getPagamento() {
+    public String getPagamento() {
         return pagamento;
     }
 
-    public void setPagamento(int pagamento) {
+    public void setPagamento(String pagamento) {
         this.pagamento = pagamento;
     }
 

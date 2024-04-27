@@ -14,7 +14,7 @@ public class cadastroClientes {
         menu();
     }
 
-    private static void menu() {
+    public static void menu() {
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("---------------------------Cadastro Clientes------------------------");
         System.out.println("-------------------------------------------------------------------------");
@@ -46,7 +46,9 @@ public class cadastroClientes {
                 menu();
                 break;
         }
+
     }
+
 
     private static void cadastrarClientes() {
         if (totalClientes < maxClientes)
@@ -88,6 +90,8 @@ public class cadastroClientes {
 
         menu();
     }
+
+
 
 }
 
