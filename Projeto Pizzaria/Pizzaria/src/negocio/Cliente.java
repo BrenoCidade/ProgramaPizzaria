@@ -2,10 +2,13 @@ package negocio;
 
 public class Cliente {
 
-    private static int count = 1;
+    private static int count = 8;
 
     private int id;
     private String nome, endereco, email, telefone, cpf;
+
+
+
 
     public Cliente(String nome, String endereco, String email, String telefone, String cpf) {
         this.id = count;
@@ -15,6 +18,15 @@ public class Cliente {
         this.telefone = telefone;
         this.cpf = cpf;
         Cliente.count += 1;
+    }
+
+    public Cliente(int id, String nome, String endereco, String email, String telefone, String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.email = email;
+        this.telefone = telefone;
+        this.cpf = cpf;
     }
 
     public int getId() {
