@@ -10,21 +10,6 @@ public class cadastroClientes {
     private static Cliente[] clientes = new Cliente[maxClientes];
     private static int totalClientes = 0;
 
-    private static Cliente cliente1 = new Cliente(1, "Felipe", "Avenida Luis Viana", "felipe@gmail.com",
-            "(71) 97171-5146", "62201965030");
-    private static Cliente cliente2 = new Cliente(2, "Lorena", "Pituba", "lorena@gmail.com", "(71) 98230-7228",
-            "32577984073");
-    private static Cliente cliente3 = new Cliente(3, "Breno", "Tancredo Neves", "breno@gmail.com", "(71) 96702-8546",
-            "01578745080");
-    private static Cliente cliente4 = new Cliente(4, "Caio", "Itaigara", "caio@gmail.com", "(71) 98640-6759",
-            "89247616093");
-    private static Cliente cliente5 = new Cliente(5, "Arthur", "Mussurunga", "arthur@gmail.com", "(71) 97497-0095",
-            "40511362056");
-    private static Cliente cliente6 = new Cliente(6, "Eduarda", "Piatã", "eduarda@gmail.com", "(71) 97174-6881",
-            "63370537028");
-    private static Cliente cliente7 = new Cliente(7, "Bruno", "Avenida Orlando Gomes", "bruno@gmail.com",
-            "(71) 98637-1674", "58929896073");
-
     public static void main(String[] args) {
         menu();
     }
@@ -95,13 +80,7 @@ public class cadastroClientes {
 
         System.out.println("Cliente Cadastrados! \n");
 
-        System.out.println(cliente1);
-        System.out.println(cliente2);
-        System.out.println(cliente3);
-        System.out.println(cliente4);
-        System.out.println(cliente5);
-        System.out.println(cliente6);
-        System.out.println(cliente7);
+
         if (totalClientes > 0) {
 
             for (int i = 0; i < totalClientes; i++) {
