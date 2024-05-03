@@ -10,6 +10,21 @@ public class cadastroClientes {
     private static Cliente[] clientes = new Cliente[maxClientes];
     private static int totalClientes = 0;
 
+    private static Cliente cliente1 = new Cliente(1, "FELIPE", "Avenida Luis Viana", "felipe@gmail.com",
+            "(71) 97171-5146", "62201965030");
+    private static Cliente cliente2 = new Cliente(2, "LORENA", "Pituba", "lorena@gmail.com", "(71) 98230-7228",
+            "32577984073");
+    private static Cliente cliente3 = new Cliente(3, "BRENO CIDADE", "Tancredo Neves", "breno@gmail.com", "(71) 96702-8546",
+            "01578745080");
+    private static Cliente cliente4 = new Cliente(4, "CAIO", "Itaigara", "caio@gmail.com", "(71) 98640-6759",
+            "89247616093");
+    private static Cliente cliente5 = new Cliente(5, "ARTHUR", "Mussurunga", "arthur@gmail.com", "(71) 97497-0095",
+            "40511362056");
+    private static Cliente cliente6 = new Cliente(6, "EDUARDA", "Piatã", "eduarda@gmail.com", "(71) 97174-6881",
+            "63370537028");
+    private static Cliente cliente7 = new Cliente(7, "BRUNO", "Avenida Orlando Gomes", "bruno@gmail.com",
+            "(71) 98637-1674", "58929896073");
+
     public static void main(String[] args) {
         menu();
     }
@@ -22,13 +37,14 @@ public class cadastroClientes {
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("|   Opcao 1 - Cadastrar   |");
         System.out.println("|   Opcao 2 - Listar   |");
-        System.out.println("|   Opcao 3 - Cadastrar pedido   |");
-        System.out.println("|   Opcao 4 - Sair   |");
+        System.out.println("|   Opcao 3 - Pesquisar   |");
+        System.out.println("|   Opcao 4 - Cadastrar pedido   |");
+        System.out.println("|   Opcao 5 - Sair   |");
 
         int opcao = src.nextInt();
 
         switch (opcao) {
-            case 1:
+        case 1:
                 cadastrarClientes();
                 break;
             case 2:
@@ -52,7 +68,7 @@ public class cadastroClientes {
     private static void cadastrarClientes() {
         if (totalClientes < maxClientes)
             System.out.print("Nome do cliente: ");
-        String nome = src.next();
+        String nome = src.next().toUpperCase();
         src.nextLine();
 
         System.out.println("CPF do cliente: ");
@@ -80,7 +96,13 @@ public class cadastroClientes {
 
         System.out.println("Cliente Cadastrados! \n");
 
-
+        System.out.println(cliente1);
+        System.out.println(cliente2);
+        System.out.println(cliente3);
+        System.out.println(cliente4);
+        System.out.println(cliente5);
+        System.out.println(cliente6);
+        System.out.println(cliente7);
         if (totalClientes > 0) {
 
             for (int i = 0; i < totalClientes; i++) {
@@ -88,5 +110,6 @@ public class cadastroClientes {
             }
         }
         menu();
+        }
     }
 }
