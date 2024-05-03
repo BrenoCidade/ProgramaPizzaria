@@ -20,15 +20,6 @@ public class Cliente {
         Cliente.count += 1;
     }
 
-    public Cliente(int id, String nome, String endereco, String email, String telefone, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.email = email;
-        this.telefone = telefone;
-        this.cpf = cpf;
-    }
-
     public int getId() {
         return id;
     }
