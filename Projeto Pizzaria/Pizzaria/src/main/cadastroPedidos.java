@@ -46,7 +46,7 @@ public class cadastroPedidos {
                 listarPedidos();
                 break;
             case 3:
-                cadastroClientes.menu();
+                cadastroClientes.menuCadastrarCliente();
                 break;
             default:
                 System.out.println("Opção inválida!");

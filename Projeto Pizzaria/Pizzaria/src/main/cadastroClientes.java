@@ -25,11 +25,7 @@ public class cadastroClientes {
     private static Cliente cliente7 = new Cliente(7, "BRUNO", "Avenida Orlando Gomes", "bruno@gmail.com",
             "(71) 98637-1674", "58929896073");
 
-    public static void main(String[] args) {
-        menu();
-    }
-
-    public static void menu() {
+    public static void menuCadastrarCliente() {
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("---------------------------Cadastro Clientes------------------------");
         System.out.println("-------------------------------------------------------------------------");
@@ -37,9 +33,8 @@ public class cadastroClientes {
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("|   Opcao 1 - Cadastrar   |");
         System.out.println("|   Opcao 2 - Listar   |");
-        System.out.println("|   Opcao 3 - Pesquisar   |");
-        System.out.println("|   Opcao 4 - Cadastrar pedido   |");
-        System.out.println("|   Opcao 5 - Sair   |");
+        System.out.println("|   Opcao 3 - Cadastrar pedido   |");
+        System.out.println("|   Opcao 4 - Voltar ao menu principal   |");       
 
         int opcao = src.nextInt();
 
@@ -53,13 +48,12 @@ public class cadastroClientes {
             case 3:
                 cadastroPedidos.menu2();
                 break;
-
             case 4:
-                System.exit(0);
+                principal.menuPrincipal();
                 break;
             default:
                 System.out.println("Opcao invalida");
-                menu();
+                menuCadastrarCliente();
                 break;
         }
 
@@ -89,7 +83,7 @@ public class cadastroClientes {
 
         System.out.println(cliente.getNome() + " cadastrado com sucesso!");
 
-        menu();
+        menuCadastrarCliente();
     }
 
     private static void listarClientes() {
@@ -109,7 +103,7 @@ public class cadastroClientes {
                 System.out.println(clientes[i] + "\n");
             }
         }
-        menu();
+        menuCadastrarCliente();
         }
     }
-}
+
