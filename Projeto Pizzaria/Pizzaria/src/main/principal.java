@@ -27,7 +27,7 @@ public class principal {
                 ;
                 break;
             case 2:
-                cadastroPedidos.menu2();
+                cadastroPedidos.menuCadastrarPedidos();;
                 break;
             case 3:
                 System.exit(0);

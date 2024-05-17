@@ -46,7 +46,7 @@ public class cadastroClientes {
                 listarClientes();
                 break;
             case 3:
-                cadastroPedidos.menu2();
+                cadastroPedidos.menuCadastrarPedidos();
                 break;
             case 4:
                 principal.menuPrincipal();

@@ -11,11 +11,7 @@ public class cadastroPedidos {
     private static Pedido[] pedidos = new Pedido[maxPedidos];
     private static int totalPedidos = 0;
 
-    public static void main(String[] args) {
-        menu2();
-    }
-
-    public static void menu2() {
+    public static void menuCadastrarPedidos() {
 
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("---------------------------Cadastro Pedidos------------------------");
@@ -50,9 +46,9 @@ public class cadastroPedidos {
                 break;
             default:
                 System.out.println("Opção inválida!");
-                menu2();
+                menuCadastrarPedidos();
         }
-        menu2();
+        menuCadastrarPedidos();
     }
 
     private static void listarPedidos() {
@@ -65,6 +61,6 @@ public class cadastroPedidos {
         } else {
             System.out.println("Nao há Pedidos cadastrados!");
         }
-        menu2();
+        menuCadastrarPedidos();
     }
 }
