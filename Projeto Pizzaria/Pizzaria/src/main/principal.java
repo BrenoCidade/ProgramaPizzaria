@@ -24,7 +24,6 @@ public class principal {
         switch (opcao) {
             case 1:
                 cadastroClientes.menuCadastrarCliente();
-                ;
                 break;
             case 2:
                 cadastroPedidos.menuCadastrarPedidos();;

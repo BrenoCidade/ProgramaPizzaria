@@ -25,17 +25,7 @@ public class cadastroPedidos {
 
         switch (opcao) {
             case 1:
-                    System.out.println("Nome do Cliente: ");
-                    String nomePessoa = src.next();
-                    System.out.println("Sabor da Pizza:");
-                    String pizza = src.next();
-                    System.out.println("Tipo de pagamento:");
-                    String pagamento = src.next();
-
-                    Pedido pedido = new Pedido(pagamento, pizza, nomePessoa);
-                    pedidos[totalPedidos++] = pedido;
-
-                    System.out.println("Pedido de " + pedido.getNomePessoa() + " cadastrado com sucesso!");
+                cadastrarPedidos();
                 break;
 
             case 2:
@@ -63,4 +53,19 @@ public class cadastroPedidos {
         }
         menuCadastrarPedidos();
     }
+
+    private static void cadastrarPedidos() {
+        System.out.println("Nome do Cliente: ");
+                    String nomePessoa = src.next();
+                    System.out.println("Sabor da Pizza:");
+                    String pizza = src.next();
+                    System.out.println("Tipo de pagamento:");
+                    String pagamento = src.next();
+
+                    Pedido pedido = new Pedido(pagamento, pizza, nomePessoa);
+                    pedidos[totalPedidos++] = pedido;
+
+                    System.out.println("Pedido de " + pedido.getNomePessoa() + " cadastrado com sucesso!");
+    }
+
 }
