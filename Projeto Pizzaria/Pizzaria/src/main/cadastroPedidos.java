@@ -126,7 +126,7 @@ public class cadastroPedidos {
         }
 
         if (!encontrado) {
-            System.out.println("Cliente nao encontrado!");
+            System.out.println("Pedido nao encontrado!");
         }
 
         menuCadastrarPedidos();
