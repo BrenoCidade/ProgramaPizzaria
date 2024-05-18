@@ -5,14 +5,21 @@ public class Pedido {
     private static int count = 1;
 
     private int id;
-    private String pizza, nomePessoa, pagamento;
+    private String pizza, pagamento;
+    private Cliente cliente;
 
-    public Pedido(String pagamento, String pizza, String nomePessoa) {
+    public Pedido(String pagamento, String pizza, Cliente cliente) {
         this.id = count;
         this.pagamento = pagamento;
         this.pizza = pizza;
-        this.nomePessoa = nomePessoa;
         Pedido.count += 1;
+    }
+
+    public Pedido(int id, Cliente cliente, String pagamento, String pizza) {
+        this.id = id;
+        this.cliente = cliente;
+        this.pagamento = pagamento;
+        this.pizza = pizza;
     }
 
     public int getId() {
@@ -39,17 +46,18 @@ public class Pedido {
         this.pizza = pizza;
     }
 
-    public String getNomePessoa() {
-        return nomePessoa;
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setNomePessoa(String nomePessoa) {
-        this.nomePessoa = nomePessoa;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public String toString() {
         return "Id: " + this.getId() +
-                "\nNome: " + this.getNomePessoa() +
+                "\nNome: " + this.cliente.getNome() +
                 "\nSabor da pizza: " + this.getPizza() +
                 "\nTipo de pagamento: " + this.getPagamento();
 
