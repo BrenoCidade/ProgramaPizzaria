@@ -2,7 +2,7 @@ package main;
 
 import java.util.Scanner;
 
-public class principal {
+public class Principal {
     public static void main(String[] args) {
         menuPrincipal();
     }
@@ -26,7 +26,7 @@ public class principal {
                 cadastroClientes.menuCadastrarCliente();
                 break;
             case 2:
-                cadastroPedidos.menuCadastrarPedidos();;
+                cadastroPedidos.menuCadastrarPedidos();
                 break;
             case 3:
                 System.exit(0);

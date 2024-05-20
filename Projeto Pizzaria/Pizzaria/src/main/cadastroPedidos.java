@@ -46,6 +46,10 @@ public class cadastroPedidos {
 
     private static void cadastrarPedidos() {
         System.out.println("Lista de Clientes Cadastrados: ");
+
+        System.out.printf("%-5s %-20s %-30s %-30s %-20s %-15s\n", "ID", "Nome", "Endereço", "Email", "Telefone", "CPF");
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+
         for (Cliente cliente : cadastroClientes.clientes) {
             System.out.println(cliente);
         }
@@ -83,7 +87,7 @@ public class cadastroPedidos {
         String pizza = src.nextLine();
 
         System.out.println("Tipo de pagamento:");
-        String pagamento = src.next();
+        String pagamento = src.nextLine();
 
         Pedido pedido = new Pedido(idCliente, clienteSelecionado, pagamento, pizza);
         pedidos.add(pedido);
@@ -96,8 +100,12 @@ public class cadastroPedidos {
     private static void listarPedidos() {
         System.out.println("***Pedidos Cadastrados!*** \n");
 
+        System.out.println(Pedido.getCabecalhoPedido());
+        System.out.println("-------------------------------------------------------------------------------------------------");
+
         for (Pedido pedido : pedidos) {
-            System.out.println(pedido);
+            System.out.printf("%-5d %-15d %-30s %-30s %-20s\n",
+            pedido.getIdPedido(), pedido.getId(), pedido.getCliente().getNome(), pedido.getPizza(), pedido.getPagamento());
         }
 
         menuCadastrarPedidos();
@@ -110,6 +118,9 @@ public class cadastroPedidos {
         String nome = src.nextLine().toUpperCase();
 
         boolean encontrado = false;
+
+        System.out.println(Pedido.getCabecalhoPedido());
+        System.out.println("-------------------------------------------------------------------------------------------------");
 
         for (Pedido pedido : pedidos) {
             String[] espacoNome = pedido.getCliente().getNome().split(" ");

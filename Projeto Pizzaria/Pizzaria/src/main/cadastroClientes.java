@@ -46,7 +46,7 @@ public class cadastroClientes {
                 pesquisarCliente();
                 break;
             case 4:
-                principal.menuPrincipal();
+                Principal.menuPrincipal();
                 break;
             default:
                 System.out.println("Opcao invalida");
@@ -85,8 +85,12 @@ public class cadastroClientes {
 
         System.out.println("Cliente Cadastrados! \n");
 
+        System.out.println(Cliente.getCabecalhoCliente());
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+
         for (Cliente cliente : clientes) {
-            System.out.println(cliente);
+            System.out.printf("%-5d %-20s %-30s %-30s %-20s %-15s\n",
+            cliente.getId(), cliente.getNome(), cliente.getEndereco(), cliente.getEmail(), cliente.getTelefone(), cliente.getCpf());
         }
 
         menuCadastrarCliente();
@@ -97,6 +101,9 @@ public class cadastroClientes {
         String nome = src.nextLine().toUpperCase();
 
         boolean encontrado = false;
+
+        System.out.println(Cliente.getCabecalhoCliente());
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------");
 
         for (Cliente cliente : clientes) {
             String [] espacoNome = cliente.getNome().split(" ");

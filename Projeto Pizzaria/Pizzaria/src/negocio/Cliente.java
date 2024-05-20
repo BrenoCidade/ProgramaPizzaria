@@ -70,13 +70,12 @@ public class Cliente {
         this.cpf = cpf;
     }
 
+    public static String getCabecalhoCliente() {
+        return String.format("%-5s %-20s %-30s %-30s %-20s %-15s", "Id", "Nome", "Endereco", "Email", "Telefone", "CPF");
+    }
+
     public String toString() {
-        return "Id: " + this.getId() +
-                "\nNome: " + this.getNome() +
-                "\nCPF: " + this.getCpf() +
-                "\nEmail: " + this.getEmail() +
-                "\nTelefone: " + this.getTelefone() +
-                "\nEndereço: " + this.getEndereco();
+        return String.format("%-5d %-20s %-30s %-30s %-20s %-15s", id, nome, endereco, email, telefone, cpf);
     }
 
 }

@@ -52,13 +52,12 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public String toString() {
-        return  "Id: " + this.getIdPedido() +
-                "\nId do Cliente: " + this.getId() +
-                "\nNome: " + this.cliente.getNome() +
-                "\nSabor da pizza: " + this.getPizza() +
-                "\nTipo de pagamento: " + this.getPagamento();
+    public static String getCabecalhoPedido() {
+        return String.format("%-5s %-15s %-30s %-30s %-20s", "Id", "Id do Cliente", "Cliente", "Pizza", "Pagamento");
+    }
 
+    public String toString() {
+        return String.format("%-5d %-15d %-30s %-30s %-20s", idPedido, id, cliente.getNome(), pizza, pagamento);
     }
 
     
