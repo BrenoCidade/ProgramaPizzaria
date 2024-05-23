@@ -2,11 +2,14 @@ package negocio;
 
 public class Cliente {
 
+    // Variável para gerar IDs únicos para cada cliente
     private static int count = 8;
 
+    // Atributos de um cliente
     private int id;
     private String nome, endereco, email, telefone, cpf;
 
+    // Construtor para criar um novo cliente com ID automático
     public Cliente(String nome, String endereco, String email, String telefone, String cpf) {
         this.id = count;
         this.nome = nome;
@@ -17,6 +20,7 @@ public class Cliente {
         Cliente.count += 1;
     }
 
+    // Construtor para criar um novo cliente com ID pré-definido
     public Cliente(int id, String nome, String endereco, String email, String telefone, String cpf) {
         this.id = id;
         this.nome = nome;
@@ -26,6 +30,7 @@ public class Cliente {
         this.cpf = cpf;
     }
 
+    // Métodos getters e setters para acessar e modificar os atributos do cliente
     public int getId() {
         return id;
     }
@@ -70,12 +75,14 @@ public class Cliente {
         this.cpf = cpf;
     }
 
+    // Método para retornar o cabeçalho formatado para exibição de clientes
     public static String getCabecalhoCliente() {
-        return String.format("%-5s %-20s %-30s %-30s %-20s %-15s", "Id", "Nome", "Endereco", "Email", "Telefone", "CPF");
+        return String.format("%-5s %-20s %-30s %-30s %-20s %-15s", "Id", "Nome", "Endereco", "Email", "Telefone",
+                "CPF");
     }
 
+    // Para retornar uma representação formatada do cliente
     public String toString() {
         return String.format("%-5d %-20s %-30s %-30s %-20s %-15s", id, nome, endereco, email, telefone, cpf);
     }
-
 }
