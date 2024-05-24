@@ -4,9 +4,12 @@ import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
+
+        // Cria instâncias das classe cadastroPedidos e cadastroClientes e a armazena na variáveis cadastro e cadastro2.
         cadastroClientes cadastro  = new cadastroClientes();
         cadastroPedidos cadastro2 = new cadastroPedidos();
-        // Chama o método menuPrincipal para iniciar o menu
+
+        // Chama o método menuPrincipal para iniciar o menu, passando como parâmetros as instâncias de cadastroClientes e cadastroPedidos.
         menuPrincipal(cadastro, cadastro2);
     }
 

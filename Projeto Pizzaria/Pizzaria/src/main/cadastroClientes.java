@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import negocio.Cliente;
 
 public class cadastroClientes {
-    // Cria um objeto Scanner para ser usado em todo o programa
+    // Cria um objeto Scanner 
     private Scanner src = new Scanner(System.in);
 
     // Cria uma lista de clientes para armazenar os objetos Cliente
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
+    // Criando um método get para chamar os pedidos do array
     public ArrayList<Cliente> getClientes() {
         return clientes;
     }
     
-    // Bloco para inicializar a lista de clientes com alguns dados
+    // Clientes pré-setados com alguns dados
     public cadastroClientes() {
         clientes.add(new Cliente(1, "FELIPE", "Avenida Luis Viana", "felipe@gmail.com", "(71) 97171-5146", "62201965030"));
         clientes.add(new Cliente(2, "LORENA", "Pituba", "lorena@gmail.com", "(71) 98230-7228", "32577984073"));
@@ -144,8 +145,7 @@ public class cadastroClientes {
                 System.out.println(cliente); // Exibe os detalhes do cliente encontrado
                 encontrado = true;
             }
-            // Verifica se a primeira palavra do nome do cliente corresponde ao nome
-            // fornecido
+            // Verifica se a primeira palavra do nome do cliente corresponde ao nome fornecido
             else if (espacoNome[0].equals(nome)) {
                 System.out.println(cliente); // Exibe os detalhes do cliente encontrado
                 encontrado = true;

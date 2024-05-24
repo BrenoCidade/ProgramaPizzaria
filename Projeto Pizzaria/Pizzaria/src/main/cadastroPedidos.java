@@ -10,11 +10,12 @@ import negocio.Pedido;
 public class cadastroPedidos {
     
 
-    // Cria um objeto Scanner para ser usado em todo o programa
+    // Cria um objeto Scanner 
     private Scanner src = new Scanner(System.in);
     // Cria uma lista de pedidos para armazenar os objetos Pedido
     public ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 
+    // Criando um método get para chamar os pedidos do array
     public ArrayList<Pedido> getPedidos() {
         return pedidos;
     }
@@ -51,7 +52,7 @@ public class cadastroPedidos {
                 break;
             case 4:
                 // Se a opção for 4, volta para o menu principal
-                Principal.menuPrincipal(null, null);
+                Principal.menuPrincipal(cadastro, cadastro2);
                 break;
             default:
                 // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
@@ -99,8 +100,7 @@ public class cadastroPedidos {
 
         Cliente clienteSelecionado = null; // Variável para armazenar o cliente selecionado
 
-        // Percorre novamente sobre a lista de clientes para encontrar o cliente com o
-        // ID
+        // Percorre novamente sobre a lista de clientes para encontrar o cliente com o ID
         for (Cliente cliente : clientes) {
             if (cliente.getId() == idCliente) {
                 clienteSelecionado = cliente;
@@ -165,19 +165,16 @@ public class cadastroPedidos {
         System.out.println(
                 "-------------------------------------------------------------------------------------------------");
 
-        // Percorre a lista de pedidos para localizar o pedido do cliente com o nome
-        // fornecido
+        // Percorre a lista de pedidos para localizar o pedido do cliente com o nome fornecido
         for (Pedido pedido : pedidos) {
             String[] espacoNome = pedido.getCliente().getNome().split(" ");
 
-            // Verifica se o nome completo do cliente no pedido corresponde ao nome
-            // fornecido
+            // Verifica se o nome completo do cliente no pedido corresponde ao nome fornecido
             if (pedido.getCliente().getNome().equals(nome)) {
                 System.out.println(pedido); // Exibe os detalhes do pedido encontrado
                 encontrado = true;
             }
-            // Verifica se a primeira palavra do nome do cliente no pedido corresponde ao
-            // nome fornecido
+            // Verifica se a primeira palavra do nome do cliente no pedido corresponde ao nome fornecido
             else if (espacoNome[0].equals(nome)) {
                 System.out.println(pedido); // Exibe os detalhes do pedido encontrado
                 encontrado = true;
