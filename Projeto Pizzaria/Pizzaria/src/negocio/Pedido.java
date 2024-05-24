@@ -58,6 +58,10 @@ public class Pedido {
 
     // Método para retornar o cabeçalho formatado para exibição de pedidos
     public static String getCabecalhoPedido() {
+        return String.format("%-5s %-15s %-30s", "Id", "Id do Cliente", "Cliente");
+    }
+
+    public static String getCabecalhoPedidoEspecifico() {
         return String.format("%-5s %-15s %-30s %-30s %-20s", "Id", "Id do Cliente", "Cliente", "Pizza", "Pagamento");
     }
 

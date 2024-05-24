@@ -8,15 +8,19 @@ import negocio.Cliente;
 import negocio.Pedido;
 
 public class cadastroPedidos {
+    
 
     // Cria um objeto Scanner para ser usado em todo o programa
-    private static Scanner src = new Scanner(System.in);
-
+    private Scanner src = new Scanner(System.in);
     // Cria uma lista de pedidos para armazenar os objetos Pedido
-    public static ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+    public ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
+    }
 
     // Método que exibe o menu de cadastro de pedidos
-    public static void menuCadastrarPedidos() {
+    public void menuCadastrarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2) {
         // Exibe o cabeçalho do menu
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("---------------------------Cadastro Pedidos------------------------");
@@ -26,7 +30,7 @@ public class cadastroPedidos {
         System.out.println("|   Opcao 1 - Cadastrar   |");
         System.out.println("|   Opcao 2 - Listar Todos Pedidos   |");
         System.out.println("|   Opcao 3 - Pesquisar Pedido   |");
-        System.out.println("|   Opcao 4 - Voltar para o menu anterior   |");
+        System.out.println("|   Opcao 4 - Voltar ao menu principal   |");
 
         // Lê a opção escolhida pelo usuário
         int opcao = src.nextInt();
@@ -35,29 +39,31 @@ public class cadastroPedidos {
         switch (opcao) {
             case 1:
                 // Se a opção for 1, chama o método para cadastrar um pedido
-                cadastrarPedidos();
+                cadastrarPedidos(cadastro, cadastro2);
                 break;
             case 2:
                 // Se a opção for 2, chama o método para listar todos os pedidos
-                listarPedidos();
+                listarPedidos(cadastro, cadastro2);
                 break;
             case 3:
                 // Se a opção for 3, chama o método para pesquisar um pedido
-                pesquisarPedido();
+                pesquisarPedido(cadastro, cadastro2);
                 break;
             case 4:
-                // Se a opção for 4, volta para o menu de cadastro de clientes
-                cadastroClientes.menuCadastrarCliente();
+                // Se a opção for 4, volta para o menu principal
+                Principal.menuPrincipal(null, null);
                 break;
             default:
                 // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
                 System.out.println("Opção inválida!");
-                menuCadastrarPedidos();
+                menuCadastrarPedidos(cadastro, cadastro2);
                 break;
         }
     }
 
-    private static void cadastrarPedidos() {
+    private void cadastrarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    // Obtém a lista de clientes
+    ArrayList<Cliente> clientes = cadastro.getClientes();
         // Exibe a lista de clientes cadastrados
         System.out.println("Lista de Clientes Cadastrados: ");
         System.out.printf("%-5s %-20s %-30s %-30s %-20s %-15s\n", "ID", "Nome", "Endereço", "Email", "Telefone", "CPF");
@@ -65,7 +71,7 @@ public class cadastroPedidos {
                 "---------------------------------------------------------------------------------------------------------------------------");
 
         // Percorre a lista de clientes e exibe cada cliente formatado
-        for (Cliente cliente : cadastroClientes.clientes) {
+        for (Cliente cliente : clientes) {
             System.out.println(cliente);
         }
 
@@ -77,7 +83,7 @@ public class cadastroPedidos {
         boolean idEncontrado = false; // Variável para verificar se o ID foi encontrado
 
         // Percorre a lista de clientes para verificar se o ID fornecido existe
-        for (Cliente cliente : cadastroClientes.clientes) {
+        for (Cliente cliente : clientes) {
             if (cliente.getId() == idCliente) {
                 idEncontrado = true;
                 break;
@@ -87,7 +93,7 @@ public class cadastroPedidos {
         // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
         if (!idEncontrado) {
             System.out.println("Cliente não encontrado!");
-            menuCadastrarPedidos();
+            menuCadastrarPedidos(cadastro, cadastro2);
             return; // Para evitar continuar a execução do método
         }
 
@@ -95,7 +101,7 @@ public class cadastroPedidos {
 
         // Percorre novamente sobre a lista de clientes para encontrar o cliente com o
         // ID
-        for (Cliente cliente : cadastroClientes.clientes) {
+        for (Cliente cliente : clientes) {
             if (cliente.getId() == idCliente) {
                 clienteSelecionado = cliente;
                 break;
@@ -123,30 +129,29 @@ public class cadastroPedidos {
         System.out.println("Pedido de " + clienteSelecionado.getNome() + " cadastrado com sucesso!");
 
         // Retorna ao menu de cadastro de pedidos
-        menuCadastrarPedidos();
+        menuCadastrarPedidos(cadastro, cadastro2);
     }
 
-    private static void listarPedidos() {
+    private void listarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2) {
         // Exibe a mensagem indicando que os pedidos cadastrados serão listados
         System.out.println("***Pedidos Cadastrados!*** \n");
 
         // Exibe o cabeçalho da tabela de pedidos
         System.out.println(Pedido.getCabecalhoPedido());
         System.out.println(
-                "-------------------------------------------------------------------------------------------------");
+                "----------------------------------------------------------");
 
         // Percorre a lista de pedidos e exibe cada pedido formatado
         for (Pedido pedido : pedidos) {
-            System.out.printf("%-5d %-15d %-30s %-30s %-20s\n",
-                    pedido.getIdPedido(), pedido.getId(), pedido.getCliente().getNome(), pedido.getPizza(),
-                    pedido.getPagamento());
+            System.out.printf("%-5d %-15d %-30s\n",
+                    pedido.getIdPedido(), pedido.getId(), pedido.getCliente().getNome());
         }
 
         // Após listar todos os pedidos, volta ao menu de cadastro de pedidos
-        menuCadastrarPedidos();
+        menuCadastrarPedidos(cadastro, cadastro2);
     }
 
-    private static void pesquisarPedido() {
+    private void pesquisarPedido(cadastroClientes cadastro, cadastroPedidos cadastro2) {
         src.nextLine();
 
         // Solicita ao usuário que digite o nome do cliente para pesquisar o pedido
@@ -156,20 +161,23 @@ public class cadastroPedidos {
         boolean encontrado = false; // Variável para indicar se o pedido foi encontrado
 
         // Exibe o cabeçalho da tabela de pedidos
-        System.out.println(Pedido.getCabecalhoPedido());
+        System.out.println(Pedido.getCabecalhoPedidoEspecifico());
         System.out.println(
                 "-------------------------------------------------------------------------------------------------");
 
-        // Percorre a lista de pedidos para localizar o pedido do cliente com o nome fornecido
+        // Percorre a lista de pedidos para localizar o pedido do cliente com o nome
+        // fornecido
         for (Pedido pedido : pedidos) {
             String[] espacoNome = pedido.getCliente().getNome().split(" ");
 
-            // Verifica se o nome completo do cliente no pedido corresponde ao nome fornecido
+            // Verifica se o nome completo do cliente no pedido corresponde ao nome
+            // fornecido
             if (pedido.getCliente().getNome().equals(nome)) {
                 System.out.println(pedido); // Exibe os detalhes do pedido encontrado
                 encontrado = true;
             }
-            // Verifica se a primeira palavra do nome do cliente no pedido corresponde ao nome fornecido
+            // Verifica se a primeira palavra do nome do cliente no pedido corresponde ao
+            // nome fornecido
             else if (espacoNome[0].equals(nome)) {
                 System.out.println(pedido); // Exibe os detalhes do pedido encontrado
                 encontrado = true;
@@ -182,7 +190,7 @@ public class cadastroPedidos {
         }
 
         // Após a pesquisa, volta ao menu de cadastro de pedidos
-        menuCadastrarPedidos();
+        menuCadastrarPedidos(cadastro, cadastro2);
     }
 
 }

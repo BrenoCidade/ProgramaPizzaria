@@ -6,28 +6,28 @@ import negocio.Cliente;
 
 public class cadastroClientes {
     // Cria um objeto Scanner para ser usado em todo o programa
-    private static Scanner src = new Scanner(System.in);
+    private Scanner src = new Scanner(System.in);
 
     // Cria uma lista de clientes para armazenar os objetos Cliente
-    public static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+    private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
-    // Bloco estático para inicializar a lista de clientes com alguns dados
-    // fictícios
-    static {
-        clientes.add(
-                new Cliente(1, "FELIPE", "Avenida Luis Viana", "felipe@gmail.com", "(71) 97171-5146", "62201965030"));
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+    
+    // Bloco para inicializar a lista de clientes com alguns dados
+    public cadastroClientes() {
+        clientes.add(new Cliente(1, "FELIPE", "Avenida Luis Viana", "felipe@gmail.com", "(71) 97171-5146", "62201965030"));
         clientes.add(new Cliente(2, "LORENA", "Pituba", "lorena@gmail.com", "(71) 98230-7228", "32577984073"));
-        clientes.add(
-                new Cliente(3, "BRENO CIDADE", "Tancredo Neves", "breno@gmail.com", "(71) 96702-8546", "01578745080"));
+        clientes.add(new Cliente(3, "BRENO CIDADE", "Tancredo Neves", "breno@gmail.com", "(71) 96702-8546", "01578745080"));
         clientes.add(new Cliente(4, "CAIO", "Itaigara", "caio@gmail.com", "(71) 98640-6759", "89247616093"));
         clientes.add(new Cliente(5, "ARTHUR", "Mussurunga", "arthur@gmail.com", "(71) 97497-0095", "40511362056"));
         clientes.add(new Cliente(6, "EDUARDA", "Piatã", "eduarda@gmail.com", "(71) 97174-6881", "63370537028"));
-        clientes.add(
-                new Cliente(7, "BRUNO", "Avenida Orlando Gomes", "bruno@gmail.com", "(71) 98637-1674", "58929896073"));
+        clientes.add(new Cliente(7, "BRUNO", "Avenida Orlando Gomes", "bruno@gmail.com", "(71) 98637-1674", "58929896073"));
     }
 
     // Método que exibe o menu de cadastro de clientes
-    public static void menuCadastrarCliente() {
+    public void menuCadastrarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2) {
         // Exibe o cabeçalho do menu
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("---------------------------Cadastro Clientes------------------------");
@@ -46,29 +46,29 @@ public class cadastroClientes {
         switch (opcao) {
             case 1:
                 // Se a opção for 1, chama o método para cadastrar um cliente
-                cadastrarClientes();
+                cadastrarClientes(cadastro, cadastro2);
                 break;
             case 2:
                 // Se a opção for 2, chama o método para listar todos os clientes
-                listarClientes();
+                listarClientes(cadastro, cadastro2);
                 break;
             case 3:
                 // Se a opção for 3, chama o método para pesquisar um cliente
-                pesquisarCliente();
+                pesquisarCliente(cadastro, cadastro2);
                 break;
             case 4:
                 // Se a opção for 4, volta ao menu principal
-                Principal.menuPrincipal();
+                Principal.menuPrincipal(cadastro, cadastro2);
                 break;
             default:
                 // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
                 System.out.println("Opcao invalida");
-                menuCadastrarCliente();
+                menuCadastrarCliente(cadastro, cadastro2);
                 break;
         }
     }
 
-    private static void cadastrarClientes() {
+    public void cadastrarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2) {
         // Solicita e lê o nome do cliente
         System.out.print("Nome do cliente: ");
         String nome = src.nextLine().toUpperCase(); // Converte o nome para letras maiúsculas
@@ -100,30 +100,29 @@ public class cadastroClientes {
         System.out.println(cliente.getNome() + " cadastrado com sucesso!");
 
         // Retorna ao menu de cadastro de clientes
-        menuCadastrarCliente();
+        menuCadastrarCliente(cadastro, cadastro2);
     }
 
-    private static void listarClientes() {
+    private void listarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2) {
         // Exibe a mensagem indicando que os clientes cadastrados serão listados
         System.out.println("Cliente Cadastrados! \n");
 
         // Exibe o cabeçalho da tabela de clientes
         System.out.println(Cliente.getCabecalhoCliente());
         System.out.println(
-                "---------------------------------------------------------------------------------------------------------------------------");
+                "----------------------------------------------------------");
 
         // Percorre a lista de clientes e exibe cada cliente em um formato tabulado
         for (Cliente cliente : clientes) {
-            System.out.printf("%-5d %-20s %-30s %-30s %-20s %-15s\n",
-                    cliente.getId(), cliente.getNome(), cliente.getEndereco(), cliente.getEmail(),
-                    cliente.getTelefone(), cliente.getCpf());
+            System.out.printf("%-5d %-20s %-30s\n",
+                    cliente.getId(), cliente.getNome(), cliente.getEndereco());
         }
 
         // Após listar todos os clientes, volta ao menu de cadastro de clientes
-        menuCadastrarCliente();
+        menuCadastrarCliente(cadastro, cadastro2);
     }
 
-    private static void pesquisarCliente() {
+    private void pesquisarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2) {
         // Solicita ao usuário que digite o nome do cliente que deseja pesquisar
         System.out.println("Digite o nome do cliente que deseja pesquisar: ");
         String nome = src.nextLine().toUpperCase();
@@ -131,7 +130,7 @@ public class cadastroClientes {
         boolean encontrado = false; // Variável para indicar se o cliente foi encontrado
 
         // Exibe o cabeçalho da tabela de clientes
-        System.out.println(Cliente.getCabecalhoCliente());
+        System.out.println(Cliente.getCabecalhoClienteEspecifico());
         System.out.println(
                 "---------------------------------------------------------------------------------------------------------------------------");
 
@@ -159,6 +158,6 @@ public class cadastroClientes {
         }
 
         // Após a pesquisa, volta ao menu de cadastro de clientes
-        menuCadastrarCliente();
+        menuCadastrarCliente(cadastro, cadastro2);
     }
 }

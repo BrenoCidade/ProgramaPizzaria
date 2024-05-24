@@ -76,9 +76,13 @@ public class Cliente {
     }
 
     // Método para retornar o cabeçalho formatado para exibição de clientes
-    public static String getCabecalhoCliente() {
+    public static String getCabecalhoClienteEspecifico() {
         return String.format("%-5s %-20s %-30s %-30s %-20s %-15s", "Id", "Nome", "Endereco", "Email", "Telefone",
                 "CPF");
+    }
+
+    public static String getCabecalhoCliente() {
+        return String.format("%-5s %-20s %-30s", "Id", "Nome", "Endereco");
     }
 
     // Para retornar uma representação formatada do cliente
