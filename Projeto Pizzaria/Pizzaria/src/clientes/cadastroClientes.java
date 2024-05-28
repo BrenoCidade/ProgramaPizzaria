@@ -1,8 +1,12 @@
-package main;
+package clientes;
 
 import java.util.Scanner;
+
+import funcionarios.cadastroFuncionarios;
+import main.Principal;
+import pedidos.cadastroPedidos;
+
 import java.util.ArrayList;
-import negocio.Cliente;
 
 public class cadastroClientes {
     // Cria um objeto Scanner 
@@ -28,7 +32,7 @@ public class cadastroClientes {
     }
 
     // Método que exibe o menu de cadastro de clientes
-    public void menuCadastrarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    public void menuCadastrarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
         // Exibe o cabeçalho do menu
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("---------------------------Cadastro Clientes------------------------");
@@ -47,29 +51,29 @@ public class cadastroClientes {
         switch (opcao) {
             case 1:
                 // Se a opção for 1, chama o método para cadastrar um cliente
-                cadastrarClientes(cadastro, cadastro2);
+                cadastrarClientes(cadastro, cadastro2, cadastro3);
                 break;
             case 2:
                 // Se a opção for 2, chama o método para listar todos os clientes
-                listarClientes(cadastro, cadastro2);
+                listarClientes(cadastro, cadastro2, cadastro3);
                 break;
             case 3:
                 // Se a opção for 3, chama o método para pesquisar um cliente
-                pesquisarCliente(cadastro, cadastro2);
+                pesquisarCliente(cadastro, cadastro2,cadastro3);
                 break;
             case 4:
                 // Se a opção for 4, volta ao menu principal
-                Principal.menuPrincipal(cadastro, cadastro2);
+                Principal.menuPrincipal(cadastro, cadastro2, cadastro3);
                 break;
             default:
                 // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
                 System.out.println("Opcao invalida");
-                menuCadastrarCliente(cadastro, cadastro2);
+                menuCadastrarCliente(cadastro, cadastro2, cadastro3);
                 break;
         }
     }
 
-    public void cadastrarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    public void cadastrarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
         // Solicita e lê o nome do cliente
         System.out.print("Nome do cliente: ");
         String nome = src.nextLine().toUpperCase(); // Converte o nome para letras maiúsculas
@@ -101,10 +105,10 @@ public class cadastroClientes {
         System.out.println(cliente.getNome() + " cadastrado com sucesso!");
 
         // Retorna ao menu de cadastro de clientes
-        menuCadastrarCliente(cadastro, cadastro2);
+        menuCadastrarCliente(cadastro, cadastro2, cadastro3);
     }
 
-    private void listarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    private void listarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
         // Exibe a mensagem indicando que os clientes cadastrados serão listados
         System.out.println("Cliente Cadastrados! \n");
 
@@ -120,10 +124,10 @@ public class cadastroClientes {
         }
 
         // Após listar todos os clientes, volta ao menu de cadastro de clientes
-        menuCadastrarCliente(cadastro, cadastro2);
+        menuCadastrarCliente(cadastro, cadastro2, cadastro3);
     }
 
-    private void pesquisarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    private void pesquisarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
         // Solicita ao usuário que digite o nome do cliente que deseja pesquisar
         System.out.println("Digite o nome do cliente que deseja pesquisar: ");
         String nome = src.nextLine().toUpperCase();
@@ -158,6 +162,6 @@ public class cadastroClientes {
         }
 
         // Após a pesquisa, volta ao menu de cadastro de clientes
-        menuCadastrarCliente(cadastro, cadastro2);
+        menuCadastrarCliente(cadastro, cadastro2, cadastro3);
     }
 }

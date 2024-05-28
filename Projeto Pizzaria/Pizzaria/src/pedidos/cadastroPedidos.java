@@ -1,17 +1,21 @@
-package main;
+package pedidos;
 
 import java.util.ArrayList;
 
 import java.util.Scanner;
 
-import negocio.Cliente;
-import negocio.Pedido;
+import clientes.Cliente;
+import clientes.cadastroClientes;
+import funcionarios.cadastroFuncionarios;
+import main.Principal;
+import produtos.Cardapio;
+import produtos.Pizza;
 
 public class cadastroPedidos {
     
 
     // Cria um objeto Scanner 
-    private Scanner src = new Scanner(System.in);
+    private static Scanner src = new Scanner(System.in);
     // Cria uma lista de pedidos para armazenar os objetos Pedido
     public ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 
@@ -21,7 +25,7 @@ public class cadastroPedidos {
     }
 
     // Método que exibe o menu de cadastro de pedidos
-    public void menuCadastrarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    public void menuCadastrarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
         // Exibe o cabeçalho do menu
         System.out.println("-------------------------------------------------------------------------");
         System.out.println("---------------------------Cadastro Pedidos------------------------");
@@ -40,29 +44,29 @@ public class cadastroPedidos {
         switch (opcao) {
             case 1:
                 // Se a opção for 1, chama o método para cadastrar um pedido
-                cadastrarPedidos(cadastro, cadastro2);
+                cadastrarPedidos(cadastro, cadastro2, cadastro3);
                 break;
             case 2:
                 // Se a opção for 2, chama o método para listar todos os pedidos
-                listarPedidos(cadastro, cadastro2);
+                listarPedidos(cadastro, cadastro2, cadastro3);
                 break;
             case 3:
                 // Se a opção for 3, chama o método para pesquisar um pedido
-                pesquisarPedido(cadastro, cadastro2);
+                pesquisarPedido(cadastro, cadastro2, cadastro3);
                 break;
             case 4:
                 // Se a opção for 4, volta para o menu principal
-                Principal.menuPrincipal(cadastro, cadastro2);
+                Principal.menuPrincipal(cadastro, cadastro2, cadastro3);
                 break;
             default:
                 // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
                 System.out.println("Opção inválida!");
-                menuCadastrarPedidos(cadastro, cadastro2);
+                menuCadastrarPedidos(cadastro, cadastro2, cadastro3);
                 break;
         }
     }
 
-    private void cadastrarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    private void cadastrarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
     // Obtém a lista de clientes
     ArrayList<Cliente> clientes = cadastro.getClientes();
         // Exibe a lista de clientes cadastrados
@@ -94,7 +98,7 @@ public class cadastroPedidos {
         // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
         if (!idEncontrado) {
             System.out.println("Cliente não encontrado!");
-            menuCadastrarPedidos(cadastro, cadastro2);
+            menuCadastrarPedidos(cadastro, cadastro2, cadastro3);
             return; // Para evitar continuar a execução do método
         }
 
@@ -114,25 +118,25 @@ public class cadastroPedidos {
         }
 
         // Solicita ao usuário o sabor da pizza
-        System.out.println("Sabor da Pizza:");
-        String pizza = src.nextLine();
+        System.out.println("Selecione a Pizza: " + "\n");
+        Cardapio cardapio = new Cardapio();
+        Pizza pizzaSelecionada = selecionarPizza(cardapio);
 
         // Solicita ao usuário o tipo de pagamento
-        System.out.println("Tipo de pagamento:");
-        String pagamento = src.nextLine();
+        String pagamento = selecionarMetodoPagamento();
 
         // Cria um novo objeto Pedido e adiciona à lista de pedidos
-        Pedido pedido = new Pedido(idCliente, clienteSelecionado, pagamento, pizza);
+        Pedido pedido = new Pedido(idCliente, clienteSelecionado, pagamento, pizzaSelecionada);
         pedidos.add(pedido);
 
         // Exibe uma mensagem de sucesso
         System.out.println("Pedido de " + clienteSelecionado.getNome() + " cadastrado com sucesso!");
 
         // Retorna ao menu de cadastro de pedidos
-        menuCadastrarPedidos(cadastro, cadastro2);
+        menuCadastrarPedidos(cadastro, cadastro2, cadastro3);
     }
 
-    private void listarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    private void listarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
         // Exibe a mensagem indicando que os pedidos cadastrados serão listados
         System.out.println("***Pedidos Cadastrados!*** \n");
 
@@ -148,10 +152,10 @@ public class cadastroPedidos {
         }
 
         // Após listar todos os pedidos, volta ao menu de cadastro de pedidos
-        menuCadastrarPedidos(cadastro, cadastro2);
+        menuCadastrarPedidos(cadastro, cadastro2, cadastro3);
     }
 
-    private void pesquisarPedido(cadastroClientes cadastro, cadastroPedidos cadastro2) {
+    private void pesquisarPedido(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
         src.nextLine();
 
         // Solicita ao usuário que digite o nome do cliente para pesquisar o pedido
@@ -187,7 +191,56 @@ public class cadastroPedidos {
         }
 
         // Após a pesquisa, volta ao menu de cadastro de pedidos
-        menuCadastrarPedidos(cadastro, cadastro2);
+        menuCadastrarPedidos(cadastro, cadastro2, cadastro3);
+    }
+
+    private Pizza selecionarPizza(Cardapio cardapio) {
+        cardapio.exibirCardapio();
+        System.out.print("Selecione o número da pizza: ");
+        int numeroPizza = src.nextInt();
+        src.nextLine(); // Limpa o buffer
+
+        if (numeroPizza > 0 && numeroPizza <= cardapio.getPizzas().size()) {
+            Pizza pizzaSelecionada = cardapio.getPizzas().get(numeroPizza - 1);
+            System.out.println("\nVocê selecionou:");
+            System.out.println(pizzaSelecionada);
+            return pizzaSelecionada;
+        } else {
+            System.out.println("Número de pizza inválido! Tente novamente.");
+            return selecionarPizza(cardapio);
+        }
+    }
+
+    private String selecionarMetodoPagamento() {
+        String pagamento = "";
+    
+        while (pagamento.isEmpty()) {
+            // Solicita ao usuário o tipo de pagamento
+            System.out.println("Selecione o método de pagamento:");
+            System.out.println("1 - PIX");
+            System.out.println("2 - CARTÃO");
+            System.out.println("3 - DINHEIRO");
+    
+            int opcaoPagamento = src.nextInt();
+            src.nextLine(); // Limpa o buffer do scanner
+    
+            switch (opcaoPagamento) {
+                case 1:
+                    pagamento = "PIX";
+                    break;
+                case 2:
+                    pagamento = "CARTÃO";
+                    break;
+                case 3:
+                    pagamento = "DINHEIRO";
+                    break;
+                default:
+                    System.out.println("Opção inválida! Por favor, selecione uma opção válida.");
+                    break;
+            }
+        }
+    
+        return pagamento;
     }
 
 }

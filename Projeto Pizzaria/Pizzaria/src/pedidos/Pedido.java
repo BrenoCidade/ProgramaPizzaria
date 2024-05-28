@@ -1,4 +1,7 @@
-package negocio;
+package pedidos;
+
+import clientes.Cliente;
+import produtos.Pizza;
 
 public class Pedido {
     
@@ -7,11 +10,12 @@ public class Pedido {
 
     // Atributos de um pedido
     private int id, idPedido;
-    private String pizza, pagamento;
+    private String pagamento;
     private Cliente cliente;
+    private Pizza pizza;
 
     // Construtor para criar um novo pedido com ID automático
-    public Pedido(int id, Cliente cliente, String pagamento, String pizza) {
+    public Pedido(int id, Cliente cliente, String pagamento, Pizza pizza) {
         this.idPedido = count++;
         this.id = id;
         this.cliente = cliente;
@@ -40,11 +44,11 @@ public class Pedido {
         this.pagamento = pagamento;
     }
 
-    public String getPizza() {
+    public Pizza getPizza() {
         return pizza;
     }
 
-    public void setPizza(String pizza) {
+    public void setPizza(Pizza pizza) {
         this.pizza = pizza;
     }
 
@@ -68,6 +72,7 @@ public class Pedido {
 
     // Para retornar uma representação formatada do pedido
     public String toString() {
-        return String.format("%-5d %-15d %-30s %-30s %-20s", idPedido, id, cliente.getNome(), pizza, pagamento);
+        return String.format("%-5d %-15d %-30s %-30s %-20s", idPedido, id, cliente.getNome(), pizza.getNome(), pagamento);
     }
+
 }

@@ -1,32 +1,30 @@
-package negocio;
+package clientes;
 
-public class Cliente {
+import negocio.Pessoa;
+
+public class Cliente extends Pessoa{
 
     // Variável para gerar IDs únicos para cada cliente
     private static int count = 8;
 
     // Atributos de um cliente
     private int id;
-    private String nome, endereco, email, telefone, cpf;
+    private String endereco, email;
 
     // Construtor para criar um novo cliente com ID automático
-    public Cliente(String nome, String endereco, String email, String telefone, String cpf) {
+    public Cliente (String nome, String endereco, String email, String telefone, String cpf) {
+        super(nome, endereco, email, cpf);
         this.id = count;
-        this.nome = nome;
         this.endereco = endereco;
-        this.email = email;
-        this.telefone = telefone;
         this.cpf = cpf;
         Cliente.count += 1;
     }
 
     // Construtor para criar um novo cliente com ID pré-definido
     public Cliente(int id, String nome, String endereco, String email, String telefone, String cpf) {
+        super(nome, email, telefone, cpf);
         this.id = id;
-        this.nome = nome;
         this.endereco = endereco;
-        this.email = email;
-        this.telefone = telefone;
         this.cpf = cpf;
     }
 
