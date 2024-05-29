@@ -138,7 +138,7 @@ public class cadastroFuncionarios {
         // Exibe o cabeçalho da tabela de Funcionarios
         System.out.println(Funcionario.getCabecalhoFuncionarioEspecifico());
         System.out.println(
-                "---------------------------------------------------------------------------------------------------------------------------");
+                "--------------------------------------------------------------------------------------------------------------------------------------------");
 
         // Percorre a lista de Funcionarios para localizar o Funcionario com o nome fornecido
         for (Funcionario Funcionario : Funcionarios) {

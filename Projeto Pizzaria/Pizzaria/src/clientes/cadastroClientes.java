@@ -119,7 +119,7 @@ public class cadastroClientes {
 
         // Percorre a lista de clientes e exibe cada cliente em um formato tabulado
         for (Cliente cliente : clientes) {
-            System.out.printf("%-5d %-20s %-30s\n",
+            System.out.printf("%-5d %-20s %-35s\n",
                     cliente.getId(), cliente.getNome(), cliente.getEndereco());
         }
 

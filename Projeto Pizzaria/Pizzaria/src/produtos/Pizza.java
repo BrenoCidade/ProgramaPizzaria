@@ -1,4 +1,6 @@
 package produtos;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Pizza {
     private String nome;
@@ -25,6 +27,9 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return "Pizza: " + nome + ", Preço: R$" + preco + ", Ingredientes: " + String.join(", ", ingredientes);
+        Locale localBrasil = Locale.getDefault();
+        NumberFormat formatoMoedaBrasil = NumberFormat.getCurrencyInstance(localBrasil);
+        String precoFormatado = formatoMoedaBrasil.format(preco);
+        return "Pizza: " + nome + ", Preço: " + precoFormatado + ", Ingredientes: " + String.join(", ", ingredientes);
     }
 }

@@ -9,7 +9,7 @@ public class Cliente extends Pessoa{
 
     // Atributos de um cliente
     private int id;
-    private String endereco, email;
+    private String endereco;
 
     // Construtor para criar um novo cliente com ID automático
     public Cliente (String nome, String endereco, String email, String telefone, String cpf) {

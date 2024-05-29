@@ -1,5 +1,6 @@
 package funcionarios;
-
+import java.text.NumberFormat;
+import java.util.Locale;
 import negocio.Pessoa;
 
 public class Funcionario extends Pessoa {
@@ -68,7 +69,10 @@ public class Funcionario extends Pessoa {
 
     // Para retornar uma representação formatada do Funcionario
     public String toString() {
-        return String.format("%-5d %-20s %-30s %-30s %-20s %-15s %-20s", id, nome, email, telefone, cpf, salario, funcao);
+        Locale localBrasil = Locale.getDefault();
+        NumberFormat formatoMoedaBrasil = NumberFormat.getCurrencyInstance(localBrasil);
+        String salarioFormatado = formatoMoedaBrasil.format(salario);
+        return String.format("%-5d %-20s %-30s %-30s %-20s %-15s %-20s", id, nome, email, telefone, cpf, salarioFormatado, funcao);
     }
 
     

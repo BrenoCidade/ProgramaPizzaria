@@ -3,15 +3,15 @@ package negocio;
 public class Pessoa {
     protected String nome, email, telefone, cpf;
 
-    public Pessoa(String nome, String telefone, String cpf) {
+    public Pessoa(String nome, String email, String telefone, String cpf) {
         this.nome = nome;
+        this.email = email;
         this.telefone = telefone;
         this.cpf = cpf;
     }
 
-    public Pessoa(String nome, String email, String telefone, String cpf) {
+    public Pessoa(String nome, String telefone, String cpf) {
         this.nome = nome;
-        this.email = email;
         this.telefone = telefone;
         this.cpf = cpf;
     }
