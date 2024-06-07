@@ -3,7 +3,7 @@ package entidades;
 public class Cliente extends Pessoa{
 
     // Variável para gerar IDs únicos para cada cliente
-    private static int count = 8;
+    private static int count = 1;
 
     // Atributos de um cliente
     private int id;
@@ -19,14 +19,18 @@ public class Cliente extends Pessoa{
     }
 
     // Construtor para criar um novo cliente com ID pré-definido
-    public Cliente(int id, String nome, String endereco, String email, String telefone, String cpf) {
+    /*public Cliente(int id, String nome, String endereco, String email, String telefone, String cpf) {
         super(nome, email, telefone, cpf);
         this.id = id;
         this.endereco = endereco;
         this.cpf = cpf;
-    }
+    }*/
 
     // Métodos getters e setters para acessar e modificar os atributos do cliente
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

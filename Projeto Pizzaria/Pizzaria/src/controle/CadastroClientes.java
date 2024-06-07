@@ -22,13 +22,16 @@ public class CadastroClientes {
 
     // Clientes pré-setados com alguns dados
     public CadastroClientes() {
-        clientes.add(new Cliente(1, "FELIPE", "Avenida Luis Viana", "felipe@gmail.com", "(71) 97171-5146", "62201965030"));
-        clientes.add(new Cliente(2, "LORENA", "Pituba", "lorena@gmail.com", "(71) 98230-7228", "32577984073"));
-        clientes.add(new Cliente(3, "BRENO CIDADE", "Tancredo Neves", "breno@gmail.com", "(71) 96702-8546", "01578745080"));
-        clientes.add(new Cliente(4, "CAIO", "Itaigara", "caio@gmail.com", "(71) 98640-6759", "89247616093"));
-        clientes.add(new Cliente(5, "ARTHUR", "Mussurunga", "arthur@gmail.com", "(71) 97497-0095", "40511362056"));
-        clientes.add(new Cliente(6, "EDUARDA", "Piatã", "eduarda@gmail.com", "(71) 97174-6881", "63370537028"));
-        clientes.add(new Cliente(7, "BRUNO", "Avenida Orlando Gomes", "bruno@gmail.com", "(71) 98637-1674", "58929896073"));
+        clientes.add(
+                new Cliente("FELIPE", "Avenida Luis Viana", "felipe@gmail.com", "(71) 97171-5146", "62201965030"));
+        clientes.add(new Cliente("LORENA", "Pituba", "lorena@gmail.com", "(71) 98230-7228", "32577984073"));
+        clientes.add(
+                new Cliente("BRENO CIDADE", "Tancredo Neves", "breno@gmail.com", "(71) 96702-8546", "01578745080"));
+        clientes.add(new Cliente("CAIO", "Itaigara", "caio@gmail.com", "(71) 98640-6759", "89247616093"));
+        clientes.add(new Cliente("ARTHUR", "Mussurunga", "arthur@gmail.com", "(71) 97497-0095", "40511362056"));
+        clientes.add(new Cliente("EDUARDA", "Piatã", "eduarda@gmail.com", "(71) 97174-6881", "63370537028"));
+        clientes.add(
+                new Cliente("BRUNO", "Avenida Orlando Gomes", "bruno@gmail.com", "(71) 98637-1674", "58929896073"));
     }
 
     // Método que exibe o menu de cadastro de clientes
@@ -45,7 +48,9 @@ public class CadastroClientes {
                 System.out.println("|   Opcao 1 - Cadastrar   |");
                 System.out.println("|   Opcao 2 - Listar Todos Clientes   |");
                 System.out.println("|   Opcao 3 - Pesquisar Cliente   |");
-                System.out.println("|   Opcao 4 - Voltar ao menu principal   |");
+                System.out.println("|   Opcao 4 - Atualizar Cliente   |");
+                System.out.println("|   Opcao 5 - Deletar Cliente   |");
+                System.out.println("|   Opcao 6 - Voltar ao menu principal   |");
 
                 try {
                     // Lê a opção escolhida pelo usuário
@@ -66,6 +71,12 @@ public class CadastroClientes {
                             pesquisarCliente(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         case 4:
+                            atualizarCliente(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
+                            break;
+                        case 5:
+                            deletarCliente(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
+                            break;
+                        case 6:
                             // Se a opção for 4, volta ao menu principal
                             Principal.menuPrincipal(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
@@ -119,7 +130,8 @@ public class CadastroClientes {
         System.out.println(cliente.getNome() + " cadastrado com sucesso!");
     }
 
-    private void listarClientes(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos, CadastroFuncionarios cadastroFuncionarios) {
+    private void listarClientes(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
         // Exibe a mensagem indicando que os clientes cadastrados serão listados
         System.out.println("Cliente Cadastrados! \n");
 
@@ -170,5 +182,163 @@ public class CadastroClientes {
         if (!encontrado) {
             System.out.println("Cliente nao encontrado!");
         }
+    }
+
+    private void atualizarCliente(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+    CadastroFuncionarios cadastroFuncionarios) {
+         // Obtém a lista de clientes
+        ArrayList<Cliente> clientes = cadastroClientes.getClientes();
+        // Exibe a lista de clientes cadastrados
+        System.out.println("Lista de Clientes Cadastrados: ");
+        System.out.printf("%-5s %-20s %-30s %-30s %-20s %-15s\n", "ID", "Nome", "Endereço", "Email", "Telefone", "CPF");
+        System.out.println(
+                "---------------------------------------------------------------------------------------------------------------------------");
+
+        // Percorre a lista de clientes e exibe cada cliente formatado
+        for (Cliente cliente : clientes) {
+            System.out.println(cliente);
+        }
+
+        // Solicita ao usuário o ID do cliente para registrar o pedido
+        System.out.println("Digite o id do cliente que deseja atualizar: ");
+        int idCliente = src.nextInt();
+        src.nextLine();
+
+        boolean idEncontrado = false; // Variável para verificar se o ID foi encontrado
+
+        // Percorre a lista de clientes para verificar se o ID fornecido existe
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == idCliente) {
+                idEncontrado = true;
+                break;
+            }
+        }
+
+        // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
+        if (!idEncontrado) {
+            System.out.println("Cliente não encontrado!");
+            menuCadastrarClientes(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
+            return; // Para evitar continuar a execução do método
+        }
+
+        Cliente clienteSelecionado = null; // Variável para armazenar o cliente selecionado
+
+        // Percorre novamente sobre a lista de clientes para encontrar o cliente com o
+        // ID
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == idCliente) {
+                clienteSelecionado = cliente;
+                break;
+            }
+        }
+
+        // Exibe o nome do cliente selecionado se encontrado
+        if (clienteSelecionado != null) {
+            System.out.println("Nome do Cliente: " + clienteSelecionado.getNome());
+        }
+
+        System.out.println("Digite as novas informações do cliente:");
+
+        System.out.println("Novo nome: ");
+        String novoNome = src.nextLine();
+
+        System.out.println("Novo endereço: ");
+        String novoEndereco = src.nextLine();
+
+        System.out.println("Novo email: ");
+        String novoEmail = src.nextLine();
+
+        System.out.println("Novo telefone: ");
+        String novoTelefone = src.nextLine();
+
+        if(!novoNome.isEmpty()){
+            clienteSelecionado.setNome(novoNome);
+        }
+
+        if(!novoEndereco.isEmpty()){
+        clienteSelecionado.setEndereco(novoEndereco);
+        }
+
+        if(!novoEmail.isEmpty()){
+        clienteSelecionado.setEmail(novoEmail);
+        }
+
+        if(!novoTelefone.isEmpty()){
+        clienteSelecionado.setTelefone(novoTelefone);
+        }
+
+        System.out.println("Cliente atualizado com sucesso!");
+        
+    }
+
+    private void deletarCliente(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
+
+                   // Obtém a lista de clientes
+        ArrayList<Cliente> clientes = cadastroClientes.getClientes();
+        // Exibe a lista de clientes cadastrados
+        System.out.println("Lista de Clientes Cadastrados: ");
+        System.out.printf("%-5s %-20s %-30s %-30s %-20s %-15s\n", "ID", "Nome", "Endereço", "Email", "Telefone", "CPF");
+        System.out.println(
+                "---------------------------------------------------------------------------------------------------------------------------");
+
+        // Percorre a lista de clientes e exibe cada cliente formatado
+        for (Cliente cliente : clientes) {
+            System.out.println(cliente);
+        }
+
+        // Solicita ao usuário o ID do cliente para registrar o pedido
+        System.out.println("Digite o id do cliente que deseja deletar: ");
+        int idCliente = src.nextInt();
+        src.nextLine();
+
+        boolean idEncontrado = false; // Variável para verificar se o ID foi encontrado
+
+        // Percorre a lista de clientes para verificar se o ID fornecido existe
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == idCliente) {
+                idEncontrado = true;
+                break;
+            }
+        }
+
+        // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
+        if (!idEncontrado) {
+            System.out.println("Cliente não encontrado!");
+            menuCadastrarClientes(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
+            return; // Para evitar continuar a execução do método
+        }
+
+        Cliente clienteSelecionado = null; // Variável para armazenar o cliente selecionado
+
+        // Percorre novamente sobre a lista de clientes para encontrar o cliente com o
+        // ID
+        for (Cliente cliente : clientes) {
+            if (cliente.getId() == idCliente) {
+                clienteSelecionado = cliente;
+                break;
+            }
+        }
+
+        // Exibe o nome do cliente selecionado se encontrado
+        if (clienteSelecionado != null) {
+            System.out.println("Nome do Cliente: " + clienteSelecionado.getNome());
+        } 
+
+        // Confirma se o usuário deseja deletar o cliente
+        System.out.println("Tem certeza que deseja deletar o cliente " + clienteSelecionado.getNome() + "? (S/N)");
+        String resposta = src.nextLine().toUpperCase();
+
+        if(resposta.equals("S")){
+            int indiceDoClienteRemovido = clientes.indexOf(clienteSelecionado);
+            clientes.remove(clienteSelecionado);
+            System.out.println("Cliente removido com sucesso");
+            for (Cliente cliente : clientes.subList(indiceDoClienteRemovido, clientes.size())) {
+                cliente.setId(cliente.getId() - 1); 
+            }
+        } else {
+            System.out.println("Cliente não removido");
+        }
+       
     }
 }
