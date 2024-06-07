@@ -5,13 +5,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import clientes.Cliente;
-import clientes.cadastroClientes;
-import funcionarios.cadastroFuncionarios;
+import clientes.CadastroClientes;
+import funcionarios.CadastroFuncionarios;
 import main.Principal;
 import produtos.Cardapio;
 import produtos.Pizza;
 
-public class cadastroPedidos {
+public class CadastroPedidos {
 
     // Cria um objeto Scanner
     private static Scanner src = new Scanner(System.in);
@@ -24,8 +24,8 @@ public class cadastroPedidos {
     }
 
     // Método que exibe o menu de cadastro de pedidos
-    public void menuCadastrarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2,
-            cadastroFuncionarios cadastro3) {
+    public void menuCadastrarPedidos(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
         try {
             while (true) {
                 // Exibe o cabeçalho do menu
@@ -47,24 +47,24 @@ public class cadastroPedidos {
                     switch (opcao) {
                         case 1:
                             // Se a opção for 1, chama o método para cadastrar um pedido
-                            cadastrarPedidos(cadastro, cadastro2, cadastro3);
+                            cadastrarPedidos(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         case 2:
                             // Se a opção for 2, chama o método para listar todos os pedidos
-                            listarPedidos(cadastro, cadastro2, cadastro3);
+                            listarPedidos(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         case 3:
                             // Se a opção for 3, chama o método para pesquisar um pedido
-                            pesquisarPedido(cadastro, cadastro2, cadastro3);
+                            pesquisarPedido(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         case 4:
                             // Se a opção for 4, volta para o menu principal
-                            Principal.menuPrincipal(cadastro, cadastro2, cadastro3);
+                            Principal.menuPrincipal(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         default:
                             // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
                             System.out.println("Opção inválida!");
-                            menuCadastrarPedidos(cadastro, cadastro2, cadastro3);
+                            menuCadastrarPedidos(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                     }
                 } catch (InputMismatchException e) {
@@ -78,10 +78,10 @@ public class cadastroPedidos {
         }
     }
 
-    private void cadastrarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2,
-            cadastroFuncionarios cadastro3) {
+    private void cadastrarPedidos(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
         // Obtém a lista de clientes
-        ArrayList<Cliente> clientes = cadastro.getClientes();
+        ArrayList<Cliente> clientes = cadastroClientes.getClientes();
         // Exibe a lista de clientes cadastrados
         System.out.println("Lista de Clientes Cadastrados: ");
         System.out.printf("%-5s %-20s %-30s %-30s %-20s %-15s\n", "ID", "Nome", "Endereço", "Email", "Telefone", "CPF");
@@ -111,7 +111,7 @@ public class cadastroPedidos {
         // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
         if (!idEncontrado) {
             System.out.println("Cliente não encontrado!");
-            menuCadastrarPedidos(cadastro, cadastro2, cadastro3);
+            menuCadastrarPedidos(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
             return; // Para evitar continuar a execução do método
         }
 
@@ -147,7 +147,7 @@ public class cadastroPedidos {
         System.out.println("Pedido de " + clienteSelecionado.getNome() + " cadastrado com sucesso!");
     }
 
-    private void listarPedidos(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
+    private void listarPedidos(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos, CadastroFuncionarios cadastroFuncionarios) {
         // Exibe a mensagem indicando que os pedidos cadastrados serão listados
         System.out.println("***Pedidos Cadastrados!*** \n");
 
@@ -163,7 +163,7 @@ public class cadastroPedidos {
         }
     }
 
-    private void pesquisarPedido(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
+    private void pesquisarPedido(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos, CadastroFuncionarios cadastroFuncionarios) {
         src.nextLine();
 
         // Solicita ao usuário que digite o nome do cliente para pesquisar o pedido

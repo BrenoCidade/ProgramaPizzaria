@@ -3,26 +3,26 @@ package main;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import clientes.cadastroClientes;
-import funcionarios.cadastroFuncionarios;
-import pedidos.cadastroPedidos;
+import clientes.CadastroClientes;
+import funcionarios.CadastroFuncionarios;
+import pedidos.CadastroPedidos;
 
 public class Principal {
     public static void main(String[] args) {
 
         // Cria instâncias das classe cadastroPedidos e cadastroClientes e a armazena na
         // variáveis cadastro e cadastro2.
-        cadastroClientes cadastro = new cadastroClientes();
-        cadastroPedidos cadastro2 = new cadastroPedidos();
-        cadastroFuncionarios cadastro3 = new cadastroFuncionarios();
+        CadastroClientes cadastroClientes = new CadastroClientes();
+        CadastroPedidos cadastroPedidos = new CadastroPedidos();
+        CadastroFuncionarios cadastroFuncionarios = new CadastroFuncionarios();
 
         // Chama o método menuPrincipal para iniciar o menu, passando como parâmetros as
         // instâncias de cadastroClientes e cadastroPedidos.
-        menuPrincipal(cadastro, cadastro2, cadastro3);
+        menuPrincipal(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
     }
 
-    public static void menuPrincipal(cadastroClientes cadastro, cadastroPedidos cadastro2,
-            cadastroFuncionarios cadastro3) {
+    public static void menuPrincipal(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
         // Cria um novo objeto Scanner para ler a entrada do usuário
         Scanner src = new Scanner(System.in);
 
@@ -45,16 +45,15 @@ public class Principal {
                 switch (opcao) {
                     case 1:
                         // Se a opção for 1, chama o método para cadastrar clientes
-
-                        cadastro.menuCadastrarCliente(cadastro, cadastro2, cadastro3);
+                        cadastroClientes.menuCadastrarClientes(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                         break;
                     case 2:
                         // Se a opção for 2, chama o método para cadastrar pedidos
-                        cadastro2.menuCadastrarPedidos(cadastro, cadastro2, cadastro3);
+                        cadastroPedidos.menuCadastrarPedidos(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                         break;
                     case 3:
                         // Se a opção for 3, chama o método para cadastrar funcionarios
-                        cadastro3.menuCadastrarFuncionarios(cadastro, cadastro2, cadastro3);
+                        cadastroFuncionarios.menuCadastrarFuncionarios(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                         break;
                     case 4:
                         // Se a opção for 3, encerra o programa
@@ -64,7 +63,7 @@ public class Principal {
                     default:
                         // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
                         System.out.println("Opcao invalida");
-                        menuPrincipal(cadastro, cadastro2, cadastro3);
+                        menuPrincipal(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                         break;
                 }
             } catch (IllegalStateException e) {

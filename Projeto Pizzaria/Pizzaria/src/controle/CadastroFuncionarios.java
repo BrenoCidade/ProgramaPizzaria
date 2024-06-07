@@ -2,14 +2,14 @@ package funcionarios;
 
 import java.util.Scanner;
 
-import clientes.cadastroClientes;
+import clientes.CadastroClientes;
 import main.Principal;
-import pedidos.cadastroPedidos;
+import pedidos.CadastroPedidos;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
-public class cadastroFuncionarios {
+public class CadastroFuncionarios {
     // Cria um objeto Scanner
     private Scanner src = new Scanner(System.in);
 
@@ -22,7 +22,7 @@ public class cadastroFuncionarios {
     }
 
     // Funcionarios pré-setados com alguns dados
-    public cadastroFuncionarios() {
+    public CadastroFuncionarios() {
         Funcionarios.add(new Funcionario(1, "FELIPE", "felipe@gmail.com", "(71) 97171-5146", "62201965030", 2000, "Atendente"));
         Funcionarios.add(new Funcionario(2, "LORENA", "lorena@gmail.com", "(71) 98230-7228", "32577984073", 5000, "Gerente"));
         Funcionarios.add(new Funcionario(3, "BRENO CIDADE", "breno@gmail.com", "(71) 96702-8546", "01578745080", 2000,
@@ -30,8 +30,8 @@ public class cadastroFuncionarios {
     }
 
     // Método que exibe o menu de cadastro de Funcionarios
-    public void menuCadastrarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2,
-            cadastroFuncionarios cadastro3) {
+    public void menuCadastrarFuncionarios(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
         try {
             while (true) {
                 // Exibe o cabeçalho do menu
@@ -53,24 +53,24 @@ public class cadastroFuncionarios {
                     switch (opcao) {
                         case 1:
                             // Se a opção for 1, chama o método para cadastrar um Funcionario
-                            cadastrarFuncionarios(cadastro, cadastro2, cadastro3);
+                            cadastrarFuncionarios(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         case 2:
                             // Se a opção for 2, chama o método para listar todos os Funcionarios
-                            listarFuncionarios(cadastro, cadastro2, cadastro3);
+                            listarFuncionarios(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         case 3:
                             // Se a opção for 3, chama o método para pesquisar um Funcionario
-                            pesquisarFuncionario(cadastro, cadastro2, cadastro3);
+                            pesquisarFuncionario(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         case 4:
                             // Se a opção for 4, volta ao menu principal
-                            Principal.menuPrincipal(cadastro, cadastro2, cadastro3);
+                            Principal.menuPrincipal(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         default:
                             // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
                             System.out.println("Opcao invalida");
-                            menuCadastrarFuncionarios(cadastro, cadastro2, cadastro3);
+                            menuCadastrarFuncionarios(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                     }
                 } catch (InputMismatchException e) {
@@ -84,8 +84,8 @@ public class cadastroFuncionarios {
         }
     }
 
-    public void cadastrarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2,
-            cadastroFuncionarios cadastro3) {
+    public void cadastrarFuncionarios(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
         // Solicita e lê o nome do Funcionario
         System.out.print("Nome do Funcionario: ");
         String nome = src.nextLine().toUpperCase(); // Converte o nome para letras maiúsculas
@@ -122,8 +122,8 @@ public class cadastroFuncionarios {
         System.out.println(Funcionario.getNome() + " cadastrado com sucesso!");
     }
 
-    private void listarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2,
-            cadastroFuncionarios cadastro3) {
+    private void listarFuncionarios(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
         // Exibe a mensagem indicando que os Funcionarios cadastrados serão listados
         System.out.println("Funcionario Cadastrados! \n");
 
@@ -141,8 +141,8 @@ public class cadastroFuncionarios {
 
     }
 
-    private void pesquisarFuncionario(cadastroClientes cadastro, cadastroPedidos cadastro2,
-            cadastroFuncionarios cadastro3) {
+    private void pesquisarFuncionario(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
+            CadastroFuncionarios cadastroFuncionarios) {
         // Solicita ao usuário que digite o nome do Funcionario que deseja pesquisar
         System.out.println("Digite o nome do Funcionario que deseja pesquisar: ");
         String nome = src.nextLine().toUpperCase();
