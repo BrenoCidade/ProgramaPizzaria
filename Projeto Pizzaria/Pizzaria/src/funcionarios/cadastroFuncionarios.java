@@ -7,9 +7,10 @@ import main.Principal;
 import pedidos.cadastroPedidos;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class cadastroFuncionarios {
-    // Cria um objeto Scanner 
+    // Cria um objeto Scanner
     private Scanner src = new Scanner(System.in);
 
     // Cria uma lista de Funcionarios para armazenar os objetos Funcionario
@@ -19,57 +20,72 @@ public class cadastroFuncionarios {
     public ArrayList<Funcionario> getFuncionarios() {
         return Funcionarios;
     }
-    
+
     // Funcionarios pré-setados com alguns dados
     public cadastroFuncionarios() {
         Funcionarios.add(new Funcionario(1, "FELIPE", "felipe@gmail.com", "(71) 97171-5146", "62201965030", 2000, "Atendente"));
         Funcionarios.add(new Funcionario(2, "LORENA", "lorena@gmail.com", "(71) 98230-7228", "32577984073", 5000, "Gerente"));
-        Funcionarios.add(new Funcionario(3, "BRENO CIDADE", "breno@gmail.com", "(71) 96702-8546", "01578745080", 2000, "Atendente"));
+        Funcionarios.add(new Funcionario(3, "BRENO CIDADE", "breno@gmail.com", "(71) 96702-8546", "01578745080", 2000,
+                "Atendente"));
     }
 
     // Método que exibe o menu de cadastro de Funcionarios
-    public void menuCadastrarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
-        // Exibe o cabeçalho do menu
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("---------------------------Cadastro Funcionarios------------------------");
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("*******Selecione a operacao que deseja realizar*******");
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("|   Opcao 1 - Cadastrar   |");
-        System.out.println("|   Opcao 2 - Listar Todos Funcionarios   |");
-        System.out.println("|   Opcao 3 - Pesquisar Funcionario   |");
-        System.out.println("|   Opcao 4 - Voltar ao menu principal   |");
+    public void menuCadastrarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2,
+            cadastroFuncionarios cadastro3) {
+        try {
+            while (true) {
+                // Exibe o cabeçalho do menu
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.println("---------------------------Cadastro Funcionarios------------------------");
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.println("*******Selecione a operacao que deseja realizar*******");
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.println("|   Opcao 1 - Cadastrar   |");
+                System.out.println("|   Opcao 2 - Listar Todos Funcionarios   |");
+                System.out.println("|   Opcao 3 - Pesquisar Funcionario   |");
+                System.out.println("|   Opcao 4 - Voltar ao menu principal   |");
 
-        // Lê a opção escolhida pelo usuário
-        int opcao = src.nextInt();
-        src.nextLine();
+                try {
+                    // Lê a opção escolhida pelo usuário
+                    int opcao = src.nextInt();
+                    src.nextLine();
 
-        switch (opcao) {
-            case 1:
-                // Se a opção for 1, chama o método para cadastrar um Funcionario
-                cadastrarFuncionarios(cadastro, cadastro2, cadastro3);
-                break;
-            case 2:
-                // Se a opção for 2, chama o método para listar todos os Funcionarios
-                listarFuncionarios(cadastro, cadastro2, cadastro3);
-                break;
-            case 3:
-                // Se a opção for 3, chama o método para pesquisar um Funcionario
-                pesquisarFuncionario(cadastro, cadastro2, cadastro3);
-                break;
-            case 4:
-                // Se a opção for 4, volta ao menu principal
-                Principal.menuPrincipal(cadastro, cadastro2, cadastro3);
-                break;
-            default:
-                // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
-                System.out.println("Opcao invalida");
-                menuCadastrarFuncionarios(cadastro, cadastro2, cadastro3);
-                break;
+                    switch (opcao) {
+                        case 1:
+                            // Se a opção for 1, chama o método para cadastrar um Funcionario
+                            cadastrarFuncionarios(cadastro, cadastro2, cadastro3);
+                            break;
+                        case 2:
+                            // Se a opção for 2, chama o método para listar todos os Funcionarios
+                            listarFuncionarios(cadastro, cadastro2, cadastro3);
+                            break;
+                        case 3:
+                            // Se a opção for 3, chama o método para pesquisar um Funcionario
+                            pesquisarFuncionario(cadastro, cadastro2, cadastro3);
+                            break;
+                        case 4:
+                            // Se a opção for 4, volta ao menu principal
+                            Principal.menuPrincipal(cadastro, cadastro2, cadastro3);
+                            break;
+                        default:
+                            // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
+                            System.out.println("Opcao invalida");
+                            menuCadastrarFuncionarios(cadastro, cadastro2, cadastro3);
+                            break;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Opção inválida! Por favor, digite uma opção válida.");
+                    src.next();
+                }
+            }
+        } catch (IllegalStateException e) {
+            // Se ocorrer algum erro, exibe uma mensagem de erro e chama o menu novamente
+            System.out.println("Ocorreu um erro!");
         }
     }
 
-    public void cadastrarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
+    public void cadastrarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2,
+            cadastroFuncionarios cadastro3) {
         // Solicita e lê o nome do Funcionario
         System.out.print("Nome do Funcionario: ");
         String nome = src.nextLine().toUpperCase(); // Converte o nome para letras maiúsculas
@@ -104,12 +120,10 @@ public class cadastroFuncionarios {
 
         // Confirma o cadastro do Funcionario
         System.out.println(Funcionario.getNome() + " cadastrado com sucesso!");
-
-        // Retorna ao menu de cadastro de Funcionarios
-        menuCadastrarFuncionarios(cadastro, cadastro2, cadastro3);
     }
 
-    private void listarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
+    private void listarFuncionarios(cadastroClientes cadastro, cadastroPedidos cadastro2,
+            cadastroFuncionarios cadastro3) {
         // Exibe a mensagem indicando que os Funcionarios cadastrados serão listados
         System.out.println("Funcionario Cadastrados! \n");
 
@@ -118,17 +132,17 @@ public class cadastroFuncionarios {
         System.out.println(
                 "----------------------------------------------------------");
 
-        // Percorre a lista de Funcionarios e exibe cada Funcionario em um formato tabulado
+        // Percorre a lista de Funcionarios e exibe cada Funcionario em um formato
+        // tabulado
         for (Funcionario Funcionario : Funcionarios) {
             System.out.printf("%-5d %-20s %-30s\n",
                     Funcionario.getId(), Funcionario.getNome(), Funcionario.getEmail());
         }
 
-        // Após listar todos os Funcionarios, volta ao menu de cadastro de Funcionarios
-        menuCadastrarFuncionarios(cadastro, cadastro2, cadastro3);
     }
 
-    private void pesquisarFuncionario(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
+    private void pesquisarFuncionario(cadastroClientes cadastro, cadastroPedidos cadastro2,
+            cadastroFuncionarios cadastro3) {
         // Solicita ao usuário que digite o nome do Funcionario que deseja pesquisar
         System.out.println("Digite o nome do Funcionario que deseja pesquisar: ");
         String nome = src.nextLine().toUpperCase();
@@ -140,7 +154,8 @@ public class cadastroFuncionarios {
         System.out.println(
                 "--------------------------------------------------------------------------------------------------------------------------------------------");
 
-        // Percorre a lista de Funcionarios para localizar o Funcionario com o nome fornecido
+        // Percorre a lista de Funcionarios para localizar o Funcionario com o nome
+        // fornecido
         for (Funcionario Funcionario : Funcionarios) {
             // Divide o nome do Funcionario em palavras para verificar o nome parcial
             String[] espacoNome = Funcionario.getNome().split(" ");
@@ -150,7 +165,8 @@ public class cadastroFuncionarios {
                 System.out.println(Funcionario); // Exibe os detalhes do Funcionario encontrado
                 encontrado = true;
             }
-            // Verifica se a primeira palavra do nome do Funcionario corresponde ao nome fornecido
+            // Verifica se a primeira palavra do nome do Funcionario corresponde ao nome
+            // fornecido
             else if (espacoNome[0].equals(nome)) {
                 System.out.println(Funcionario); // Exibe os detalhes do Funcionario encontrado
                 encontrado = true;
@@ -161,10 +177,5 @@ public class cadastroFuncionarios {
         if (!encontrado) {
             System.out.println("Funcionario nao encontrado!");
         }
-
-        // Após a pesquisa, volta ao menu de cadastro de Funcionarios
-        menuCadastrarFuncionarios(cadastro, cadastro2, cadastro3);
     }
 }
-
-

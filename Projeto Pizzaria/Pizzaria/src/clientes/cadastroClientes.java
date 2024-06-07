@@ -7,9 +7,10 @@ import main.Principal;
 import pedidos.cadastroPedidos;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class cadastroClientes {
-    // Cria um objeto Scanner 
+    // Cria um objeto Scanner
     private Scanner src = new Scanner(System.in);
 
     // Cria uma lista de clientes para armazenar os objetos Cliente
@@ -19,7 +20,7 @@ public class cadastroClientes {
     public ArrayList<Cliente> getClientes() {
         return clientes;
     }
-    
+
     // Clientes pré-setados com alguns dados
     public cadastroClientes() {
         clientes.add(new Cliente(1, "FELIPE", "Avenida Luis Viana", "felipe@gmail.com", "(71) 97171-5146", "62201965030"));
@@ -32,48 +33,62 @@ public class cadastroClientes {
     }
 
     // Método que exibe o menu de cadastro de clientes
-    public void menuCadastrarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
-        // Exibe o cabeçalho do menu
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("---------------------------Cadastro Clientes------------------------");
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("*******Selecione a operacao que deseja realizar*******");
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("|   Opcao 1 - Cadastrar   |");
-        System.out.println("|   Opcao 2 - Listar Todos Clientes   |");
-        System.out.println("|   Opcao 3 - Pesquisar Cliente   |");
-        System.out.println("|   Opcao 4 - Voltar ao menu principal   |");
+    public void menuCadastrarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2,
+            cadastroFuncionarios cadastro3) {
+        try {
+            while (true) {
+                // Exibe o cabeçalho do menu
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.println("---------------------------Cadastro Clientes------------------------");
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.println("*******Selecione a operacao que deseja realizar*******");
+                System.out.println("-------------------------------------------------------------------------");
+                System.out.println("|   Opcao 1 - Cadastrar   |");
+                System.out.println("|   Opcao 2 - Listar Todos Clientes   |");
+                System.out.println("|   Opcao 3 - Pesquisar Cliente   |");
+                System.out.println("|   Opcao 4 - Voltar ao menu principal   |");
 
-        // Lê a opção escolhida pelo usuário
-        int opcao = src.nextInt();
-        src.nextLine();
+                try {
+                    // Lê a opção escolhida pelo usuário
+                    int opcao = src.nextInt();
+                    src.nextLine();
 
-        switch (opcao) {
-            case 1:
-                // Se a opção for 1, chama o método para cadastrar um cliente
-                cadastrarClientes(cadastro, cadastro2, cadastro3);
-                break;
-            case 2:
-                // Se a opção for 2, chama o método para listar todos os clientes
-                listarClientes(cadastro, cadastro2, cadastro3);
-                break;
-            case 3:
-                // Se a opção for 3, chama o método para pesquisar um cliente
-                pesquisarCliente(cadastro, cadastro2,cadastro3);
-                break;
-            case 4:
-                // Se a opção for 4, volta ao menu principal
-                Principal.menuPrincipal(cadastro, cadastro2, cadastro3);
-                break;
-            default:
-                // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
-                System.out.println("Opcao invalida");
-                menuCadastrarCliente(cadastro, cadastro2, cadastro3);
-                break;
+                    switch (opcao) {
+                        case 1:
+                            // Se a opção for 1, chama o método para cadastrar um cliente
+                            cadastrarClientes(cadastro, cadastro2, cadastro3);
+                            break;
+                        case 2:
+                            // Se a opção for 2, chama o método para listar todos os clientes
+                            listarClientes(cadastro, cadastro2, cadastro3);
+                            break;
+                        case 3:
+                            // Se a opção for 3, chama o método para pesquisar um cliente
+                            pesquisarCliente(cadastro, cadastro2, cadastro3);
+                            break;
+                        case 4:
+                            // Se a opção for 4, volta ao menu principal
+                            Principal.menuPrincipal(cadastro, cadastro2, cadastro3);
+                            break;
+                        default:
+                            // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
+                            System.out.println("Opcao invalida");
+                            menuCadastrarCliente(cadastro, cadastro2, cadastro3);
+                            break;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Opção inválida! Por favor, digite uma opção válida.");
+                    src.next();
+                }
+            }
+        } catch (IllegalStateException e) {
+            // Se ocorrer algum erro, exibe uma mensagem de erro e chama o menu novamente
+            System.out.println("Ocorreu um erro!");
         }
     }
 
-    public void cadastrarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
+    public void cadastrarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2,
+            cadastroFuncionarios cadastro3) {
         // Solicita e lê o nome do cliente
         System.out.print("Nome do cliente: ");
         String nome = src.nextLine().toUpperCase(); // Converte o nome para letras maiúsculas
@@ -103,9 +118,6 @@ public class cadastroClientes {
 
         // Confirma o cadastro do cliente
         System.out.println(cliente.getNome() + " cadastrado com sucesso!");
-
-        // Retorna ao menu de cadastro de clientes
-        menuCadastrarCliente(cadastro, cadastro2, cadastro3);
     }
 
     private void listarClientes(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
@@ -122,12 +134,10 @@ public class cadastroClientes {
             System.out.printf("%-5d %-20s %-35s\n",
                     cliente.getId(), cliente.getNome(), cliente.getEndereco());
         }
-
-        // Após listar todos os clientes, volta ao menu de cadastro de clientes
-        menuCadastrarCliente(cadastro, cadastro2, cadastro3);
     }
 
-    private void pesquisarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2, cadastroFuncionarios cadastro3) {
+    private void pesquisarCliente(cadastroClientes cadastro, cadastroPedidos cadastro2,
+            cadastroFuncionarios cadastro3) {
         // Solicita ao usuário que digite o nome do cliente que deseja pesquisar
         System.out.println("Digite o nome do cliente que deseja pesquisar: ");
         String nome = src.nextLine().toUpperCase();
@@ -149,7 +159,8 @@ public class cadastroClientes {
                 System.out.println(cliente); // Exibe os detalhes do cliente encontrado
                 encontrado = true;
             }
-            // Verifica se a primeira palavra do nome do cliente corresponde ao nome fornecido
+            // Verifica se a primeira palavra do nome do cliente corresponde ao nome
+            // fornecido
             else if (espacoNome[0].equals(nome)) {
                 System.out.println(cliente); // Exibe os detalhes do cliente encontrado
                 encontrado = true;
@@ -160,8 +171,5 @@ public class cadastroClientes {
         if (!encontrado) {
             System.out.println("Cliente nao encontrado!");
         }
-
-        // Após a pesquisa, volta ao menu de cadastro de clientes
-        menuCadastrarCliente(cadastro, cadastro2, cadastro3);
     }
 }
