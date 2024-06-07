@@ -1,10 +1,9 @@
-package clientes;
+package controle;
 
 import java.util.Scanner;
 
-import funcionarios.CadastroFuncionarios;
+import entidades.Cliente;
 import main.Principal;
-import pedidos.CadastroPedidos;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

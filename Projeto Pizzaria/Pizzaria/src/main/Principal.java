@@ -3,9 +3,9 @@ package main;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import clientes.CadastroClientes;
-import funcionarios.CadastroFuncionarios;
-import pedidos.CadastroPedidos;
+import controle.CadastroClientes;
+import controle.CadastroFuncionarios;
+import controle.CadastroPedidos;
 
 public class Principal {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package negocio;
+package entidades;
 
 public class Pessoa {
     protected String nome, email, telefone, cpf;

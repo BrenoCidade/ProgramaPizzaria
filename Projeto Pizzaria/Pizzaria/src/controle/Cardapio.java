@@ -1,7 +1,9 @@
-package produtos;
+package controle;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import entidades.Pizza;
 
 public class Cardapio {
     private List<Pizza> pizzas;

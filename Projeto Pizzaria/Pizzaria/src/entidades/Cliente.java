@@ -1,6 +1,4 @@
-package clientes;
-
-import negocio.Pessoa;
+package entidades;
 
 public class Cliente extends Pessoa{
 

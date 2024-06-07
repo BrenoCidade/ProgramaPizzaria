@@ -1,7 +1,4 @@
-package pedidos;
-
-import clientes.Cliente;
-import produtos.Pizza;
+package entidades;
 
 public class Pedido {
     

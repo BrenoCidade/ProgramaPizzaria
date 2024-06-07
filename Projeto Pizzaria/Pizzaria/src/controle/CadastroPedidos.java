@@ -1,15 +1,13 @@
-package pedidos;
+package controle;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import clientes.Cliente;
-import clientes.CadastroClientes;
-import funcionarios.CadastroFuncionarios;
+import entidades.Cliente;
+import entidades.Pedido;
+import entidades.Pizza;
 import main.Principal;
-import produtos.Cardapio;
-import produtos.Pizza;
 
 public class CadastroPedidos {
 

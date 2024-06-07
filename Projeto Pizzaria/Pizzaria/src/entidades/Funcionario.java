@@ -1,7 +1,6 @@
-package funcionarios;
+package entidades;
 import java.text.NumberFormat;
 import java.util.Locale;
-import negocio.Pessoa;
 
 public class Funcionario extends Pessoa {
     private int count = 4;
