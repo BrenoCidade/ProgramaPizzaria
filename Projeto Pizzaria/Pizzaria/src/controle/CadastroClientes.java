@@ -36,7 +36,7 @@ public class CadastroClientes {
 
     // Método que exibe o menu de cadastro de clientes
     public void menuCadastrarClientes(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
-            CadastroFuncionarios cadastroFuncionarios) {
+            CadastroFuncionarios cadastroFuncionarios, Cardapio cardapio) {
         try {
             while (true) {
                 // Exibe o cabeçalho do menu
@@ -77,13 +77,13 @@ public class CadastroClientes {
                             deletarCliente(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
                             break;
                         case 6:
-                            // Se a opção for 4, volta ao menu principal
-                            Principal.menuPrincipal(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
+                            // Se a opção for 6, volta ao menu principal
+                            Principal.menuPrincipal(cadastroClientes, cadastroPedidos, cadastroFuncionarios, cardapio);
                             break;
                         default:
                             // Se a opção for inválida, exibe uma mensagem de erro e chama o menu novamente
                             System.out.println("Opcao invalida");
-                            menuCadastrarClientes(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
+                            menuCadastrarClientes(cadastroClientes, cadastroPedidos, cadastroFuncionarios, cardapio);
                             break;
                     }
                 } catch (InputMismatchException e) {
@@ -204,27 +204,9 @@ public class CadastroClientes {
         int idCliente = src.nextInt();
         src.nextLine();
 
-        boolean idEncontrado = false; // Variável para verificar se o ID foi encontrado
+        Cliente clienteSelecionado = null; // Variável para verificar se o ID foi encontrado
 
         // Percorre a lista de clientes para verificar se o ID fornecido existe
-        for (Cliente cliente : clientes) {
-            if (cliente.getId() == idCliente) {
-                idEncontrado = true;
-                break;
-            }
-        }
-
-        // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
-        if (!idEncontrado) {
-            System.out.println("Cliente não encontrado!");
-            menuCadastrarClientes(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
-            return; // Para evitar continuar a execução do método
-        }
-
-        Cliente clienteSelecionado = null; // Variável para armazenar o cliente selecionado
-
-        // Percorre novamente sobre a lista de clientes para encontrar o cliente com o
-        // ID
         for (Cliente cliente : clientes) {
             if (cliente.getId() == idCliente) {
                 clienteSelecionado = cliente;
@@ -232,15 +214,20 @@ public class CadastroClientes {
             }
         }
 
-        // Exibe o nome do cliente selecionado se encontrado
-        if (clienteSelecionado != null) {
-            System.out.println("Nome do Cliente: " + clienteSelecionado.getNome());
+        // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
+        if (clienteSelecionado == null) {
+            System.out.println("Cliente não encontrado!");
+            return; // Para evitar continuar a execução do método
         }
 
+        // Exibe o nome do cliente selecionado se encontrado
+        System.out.println("Nome do Cliente: " + clienteSelecionado.getNome());
+
+        // Solicita ao usuário as novas informações do cliente
         System.out.println("Digite as novas informações do cliente:");
 
         System.out.println("Novo nome: ");
-        String novoNome = src.nextLine();
+        String novoNome = src.nextLine().toUpperCase();
 
         System.out.println("Novo endereço: ");
         String novoEndereco = src.nextLine();
@@ -274,7 +261,7 @@ public class CadastroClientes {
     private void deletarCliente(CadastroClientes cadastroClientes, CadastroPedidos cadastroPedidos,
             CadastroFuncionarios cadastroFuncionarios) {
 
-                   // Obtém a lista de clientes
+        // Obtém a lista de clientes
         ArrayList<Cliente> clientes = cadastroClientes.getClientes();
         // Exibe a lista de clientes cadastrados
         System.out.println("Lista de Clientes Cadastrados: ");
@@ -288,31 +275,13 @@ public class CadastroClientes {
         }
 
         // Solicita ao usuário o ID do cliente para registrar o pedido
-        System.out.println("Digite o id do cliente que deseja deletar: ");
+        System.out.println("Digite o id do cliente que deseja atualizar: ");
         int idCliente = src.nextInt();
         src.nextLine();
 
-        boolean idEncontrado = false; // Variável para verificar se o ID foi encontrado
+        Cliente clienteSelecionado = null; // Variável para verificar se o ID foi encontrado
 
         // Percorre a lista de clientes para verificar se o ID fornecido existe
-        for (Cliente cliente : clientes) {
-            if (cliente.getId() == idCliente) {
-                idEncontrado = true;
-                break;
-            }
-        }
-
-        // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
-        if (!idEncontrado) {
-            System.out.println("Cliente não encontrado!");
-            menuCadastrarClientes(cadastroClientes, cadastroPedidos, cadastroFuncionarios);
-            return; // Para evitar continuar a execução do método
-        }
-
-        Cliente clienteSelecionado = null; // Variável para armazenar o cliente selecionado
-
-        // Percorre novamente sobre a lista de clientes para encontrar o cliente com o
-        // ID
         for (Cliente cliente : clientes) {
             if (cliente.getId() == idCliente) {
                 clienteSelecionado = cliente;
@@ -320,10 +289,14 @@ public class CadastroClientes {
             }
         }
 
+        // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
+        if (clienteSelecionado == null) {
+            System.out.println("Cliente não encontrado!");
+            return; // Para evitar continuar a execução do método
+        }
+
         // Exibe o nome do cliente selecionado se encontrado
-        if (clienteSelecionado != null) {
-            System.out.println("Nome do Cliente: " + clienteSelecionado.getNome());
-        } 
+        System.out.println("Nome do Cliente: " + clienteSelecionado.getNome());
 
         // Confirma se o usuário deseja deletar o cliente
         System.out.println("Tem certeza que deseja deletar o cliente " + clienteSelecionado.getNome() + "? (S/N)");
