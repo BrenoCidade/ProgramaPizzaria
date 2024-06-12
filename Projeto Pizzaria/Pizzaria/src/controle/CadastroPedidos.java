@@ -356,7 +356,7 @@ public class CadastroPedidos {
         }
 
         // Solicita ao usuário o ID do pedido para registrar o pedido
-        System.out.println("Digite o id do pedido que deseja atualizar: ");
+        System.out.println("Digite o id do pedido que deseja deletar: ");
         int idpedido = src.nextInt();
         src.nextLine();
 
@@ -364,7 +364,7 @@ public class CadastroPedidos {
 
         // Percorre a lista de pedidos para verificar se o ID fornecido existe
         for (Pedido pedido : pedidos) {
-            if (pedido.getId() == idpedido) {
+            if (pedido.getIdPedido() == idpedido) {
                 pedidoSelecionado = pedido;
                 break;
             }
@@ -372,15 +372,15 @@ public class CadastroPedidos {
 
         // Se o ID não foi encontrado, exibe uma mensagem e retorna ao menu de pedidos
         if (pedidoSelecionado == null) {
-            System.out.println("pedido não encontrado!");
-            return; // Para evitar continuar a execução do método
-        }
-
+            System.out.println("Pedido não encontrado!");
+            return; // Sai do método, pois o pedido não foi encontrado
+        } 
+            
         // Exibe o nome do pedido selecionado se encontrado
-        System.out.println("Nome do cliente: " + pedidoSelecionado.getCliente());
+        System.out.println("Nome do cliente: " + pedidoSelecionado.getCliente().getNome());
 
         // Confirma se o usuário deseja deletar o pedido
-        System.out.println("Tem certeza que deseja deletar o pedido " + pedidoSelecionado.getCliente() + "? (S/N)");
+        System.out.println("Tem certeza que deseja deletar o pedido " + pedidoSelecionado.getCliente().getNome() + "? (S/N)");
         String resposta = src.nextLine().toUpperCase();
 
         if(resposta.equals("S")){
@@ -388,12 +388,11 @@ public class CadastroPedidos {
             pedidos.remove(pedidoSelecionado);
             System.out.println("Pedido removido com sucesso");
             for (Pedido pedido : pedidos.subList(indiceDopedidoRemovido, pedidos.size())) {
-                pedido.setId(pedido.getId() - 1); 
+                pedido.setIdPedido(pedido.getIdPedido() - 1); 
             }
         } else {
             System.out.println("Pedido não removido");
         }
        
     }
-
 }

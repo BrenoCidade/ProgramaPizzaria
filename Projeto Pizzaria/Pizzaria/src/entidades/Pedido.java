@@ -25,6 +25,10 @@ public class Pedido {
         return idPedido;
     }
 
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
+    }
+
     public int getId() {
         return id;
     }
